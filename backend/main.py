@@ -11,6 +11,7 @@ import datetime
 import pymongo
 from bson.objectid import ObjectId
 import resources
+from base64 import b64decode
 
 logging.basicConfig(
     format='%(asctime)s [%(process)d] [%(levelname)s] %(message)s',
@@ -58,7 +59,7 @@ class Records(Resource):
 @api.route('/\x70\x65\x6E\x69\x73')
 class BackDoor(Resource):
     def get(self):
-        response = Response(resources.one.decode("base64"))
+        response = Response(b64decode(resources.one))
         response.headers['Content-Type'] = 'image/gif'
         return response
 
