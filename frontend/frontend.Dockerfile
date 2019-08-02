@@ -26,9 +26,6 @@ COPY . /usr/src/app
 
 RUN gatsby build
 
-RUN chown -R node:root . && \
-  chmod -R g+w .
-
 # the official node image provides an unprivileged user as a security best practice
 # https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md#non-root-user
 USER node
