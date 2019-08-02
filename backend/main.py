@@ -1,6 +1,5 @@
 # app.py - a minimal flask api using flask_restful
-from flask import Flask, redirect, url_for
-from flask import jsonify
+from flask import Flask, redirect, url_for, jsonify, request
 from flask_restplus import Resource, Api, fields
 import pprint
 import os
@@ -28,6 +27,13 @@ class HelloWorld(Resource):
     def get(self):
         return jsonify(hello="world")
 
+# test with curl -H "Content-Type: application/json" -X PUT -d "{penis: tachatte}" http://localhost:8000/records
+@api.route('/records')
+@api.doc()
+class Records(Resource):
+    def put(self):
+        payload = json.loads(request.data)
+        return payload["penis"]
 
 if __name__ == "__main__":
     app.run()  # pragma: no cover
