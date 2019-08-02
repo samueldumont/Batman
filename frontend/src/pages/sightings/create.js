@@ -1,6 +1,10 @@
 import React from "react"
+<<<<<<< HEAD
 import { DatePicker, Form, Input, Cascader, Button } from "antd"
 import Layout from '../../components/layout'
+=======
+import { DatePicker, Form, Input, Cascader, Select, Button } from "antd"
+>>>>>>> 87c2b94e4b072f5498c71912b56e021ab03cadcf
 
 const habitats = [
   {
@@ -185,7 +189,7 @@ class BatRegistrationSubmissionForm extends React.Component {
             ],
           })(<Input placeholder="Enter a device number" />)}
         </Form.Item>
-        <Form.Item label="Microphone numberr">
+        <Form.Item label="Microphone number">
           {getFieldDecorator("email", {
             rules: [
               {
