@@ -17,7 +17,7 @@ logging.basicConfig(
 
 app = Flask(__name__)
 
-password = os.environ['MONGO_PASSWORD']
+password = "B4tm4n"
 client = pymongo.MongoClient("mongodb+srv://batman:" + password + "@batman-hitw-td41w.mongodb.net/hitw?retryWrites=true&w=majority")
 db = client.hitw
 
