@@ -1,5 +1,6 @@
 import React from "react"
 import { DatePicker, Form, Input, Cascader, Button } from "antd"
+import Layout from '../../components/layout'
 
 const habitats = [
   {
@@ -172,6 +173,7 @@ class BatRegistrationSubmissionForm extends React.Component {
     }
 
     return (
+      <Layout>
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
         <Form.Item label="Device number">
           {getFieldDecorator("email", {
@@ -343,6 +345,7 @@ class BatRegistrationSubmissionForm extends React.Component {
           </Button>
         </Form.Item>
       </Form>
+      </Layout>
     )
   }
 }
