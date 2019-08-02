@@ -4,7 +4,7 @@ from flask_restplus import Resource, Api, fields
 import pprint
 import os
 import re
-from werkzeug.exceptions import BadRequest, InternalServerError, NotFound
+from werkzeug.exceptions import BadRequest, InternalServerError, NotFound, ImATeapot
 import json
 import logging
 import datetime
@@ -25,7 +25,6 @@ api = Api(app,
           version="v0.0.0",
           title="BATMAN BACKEND",
           description="BATMAN BACKEND")
-
 
 @api.route('/releves')
 @api.doc()
@@ -48,13 +47,12 @@ class GetReleves(Resource):
         else:
             raise NotFound
 
-# test with curl -H "Content-Type: application/json" -X PUT -d "{penis: tachatte}" http://localhost:8000/records
 @api.route('/records')
 @api.doc()
 class Records(Resource):
     def put(self):
-        payload = json.loads(request.data)
-        return payload["penis"]
+        db.data.insert_one(json.loads(request.data))
+        return "OK"
 
 if __name__ == "__main__":
     app.run()  # pragma: no cover
