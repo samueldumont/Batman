@@ -26,14 +26,20 @@ api = Api(app,
           title="BATMAN BACKEND",
           description="BATMAN BACKEND")
 
-@api.route('/hello')
+@api.route('/releves')
 @api.doc()
-class HelloWorld(Resource):
+class Releves(Resource):
+
+    def post(self):
+        payload = json.loads(request.data)
+        post_res = db.releves.insert_one(payload).inserted_id
+        return jsonify({'id': str(post_res)})
+
     def get(self):
-        post_res = db.releves.insert_one({'name':'toto', 'age':42})
-        get_res = db.releves.find_one({'_id': post_res.inserted_id})
-        del get_res['_id']
-        return jsonify(get_res)
+        # post_res = db.releves.insert_one({'name':'toto', 'age':42})
+        # get_res = db.releves.find_one({'_id': post_res.inserted_id})
+        # del get_res['_id']
+        return jsonify({'releves':'get'})
 
 @api.route('/records')
 @api.doc()
