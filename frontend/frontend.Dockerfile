@@ -7,7 +7,7 @@ ARG NODE_ENV=production
 ENV NODE_ENV $NODE_ENV
 
 # default to port 3000 for node
-ARG PORT=80
+ARG PORT=9000
 ENV PORT $PORT
 EXPOSE $PORT
 
@@ -28,4 +28,4 @@ RUN gatsby build
 # https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md#non-root-user
 USER node
 
-CMD [ "gatsby", "serve", "-H", "0.0.0.0", "-p", "80" ]
+CMD [ "gatsby", "serve", "-H", "0.0.0.0" ]
