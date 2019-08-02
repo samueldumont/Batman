@@ -32,7 +32,7 @@ class PostReleves(Resource):
 
     def post(self):
         payload = json.loads(request.data)
-        post_res = db.releves.insert_one(payload).inserted_id
+        post_res = db.data.insert_one(payload).inserted_id
         return jsonify({'id': str(post_res)})
 
     
@@ -40,7 +40,7 @@ class PostReleves(Resource):
 @api.doc()
 class GetReleves(Resource):
     def get(self, releve_id):
-        get_res = db.releves.find_one({'_id': ObjectId(releve_id)})
+        get_res = db.data.find_one({'_id': ObjectId(releve_id)})
         if get_res:
             del get_res['_id']
             return get_res
