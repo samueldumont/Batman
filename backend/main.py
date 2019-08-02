@@ -9,12 +9,17 @@ from werkzeug.exceptions import BadRequest, InternalServerError, NotFound
 import json
 import logging
 import datetime
+import pymongo
 
 logging.basicConfig(
     format='%(asctime)s [%(process)d] [%(levelname)s] %(message)s',
     datefmt='[%Y-%m-%d %H:%M:%S %z]')
 
 app = Flask(__name__)
+
+password = os.environ['MONGO_PASSWORD']
+client = pymongo.MongoClient("mongodb+srv://batman:" + password +"@batman-hitw-td41w.mongodb.net/test?retryWrites=true&w=majority")
+db = client.test
 
 api = Api(app,
           version="v0.0.0",
