@@ -1,5 +1,5 @@
 # when changing version, do update all Dockerfile*s in this repo!!!
-FROM node:10-alpine
+FROM node:10-alpine AS build-env
 
 # set our node environment, either development or production
 # defaults to production, compose overrides this to development on build and run
@@ -24,8 +24,8 @@ COPY . /usr/src/app
 
 RUN gatsby build
 
-# the official node image provides an unprivileged user as a security best practice
-# https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md#non-root-user
-USER node
+RUN ls -altrh /usr/src/app
 
-CMD [ "gatsby", "develop", "-H", "0.0.0.0", "-p", "80" ]
+FROM flashspys/nginx-static
+RUN apk update && apk upgrade
+COPY --from=0 /usr/src/app/public /static
