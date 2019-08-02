@@ -183,7 +183,7 @@ class BatRegistrationSubmissionForm extends React.Component {
             ],
           })(<Input placeholder="Enter a device number" />)}
         </Form.Item>
-        <Form.Item label="Microphone numberr">
+        <Form.Item label="Microphone number">
           {getFieldDecorator("email", {
             rules: [
               {
