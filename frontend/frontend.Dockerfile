@@ -6,8 +6,6 @@ FROM node:10-alpine
 ARG NODE_ENV=production
 ENV NODE_ENV $NODE_ENV
 
-ENV NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/ktb.crt
-
 # default to port 3000 for node
 ARG PORT=80
 ENV PORT $PORT
@@ -30,4 +28,4 @@ RUN gatsby build
 # https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md#non-root-user
 USER node
 
-CMD [ "gatsby", "serve", "-p", "80" ]
+CMD [ "gatsby", "serve", "-H", "0.0.0.0", "-p", "80" ]
