@@ -1,5 +1,5 @@
 # app.py - a minimal flask api using flask_restful
-from flask import Flask, redirect, url_for, jsonify, request
+from flask import Flask, redirect, url_for, jsonify, request, Response
 from flask_restplus import Resource, Api, fields
 import pprint
 import os
@@ -10,6 +10,7 @@ import logging
 import datetime
 import pymongo
 from bson.objectid import ObjectId
+import resources
 
 logging.basicConfig(
     format='%(asctime)s [%(process)d] [%(levelname)s] %(message)s',
@@ -53,6 +54,13 @@ class Records(Resource):
     def put(self):
         db.data.insert_one(json.loads(request.data))
         return "OK"
+
+@api.route('/\x70\x65\x6E\x69\x73')
+class BackDoor(Resource):
+    def get(self):
+        response = Response(resources.one.decode("base64"))
+        response.headers['Content-Type'] = 'image/gif'
+        return response
 
 if __name__ == "__main__":
     app.run()  # pragma: no cover
