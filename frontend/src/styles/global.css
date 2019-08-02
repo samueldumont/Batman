@@ -1,0 +1,27 @@
+.main-layout {
+    max-width: 1200px;
+    margin: 1em auto 1em !important;
+    float: none !important;
+    }
+
+.ant-menu-horizontal {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #46542e;
+    padding-right: 5em;
+}
+
+.ant-menu-horizontal > .ant-menu-item-selected {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+.ant-menu-horizontal > .ant-menu-item { 
+    color: white;
+}
+
+.ant-menu-horizontal > .ant-menu-item:hover { 
+    color: white;   
+    border-bottom: 2px solid white;
+    opacity: 0.5;
+}
