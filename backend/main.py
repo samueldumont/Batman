@@ -29,18 +29,24 @@ api = Api(app,
 
 @api.route('/releves')
 @api.doc()
-class Releves(Resource):
+class PostReleves(Resource):
 
     def post(self):
         payload = json.loads(request.data)
         post_res = db.releves.insert_one(payload).inserted_id
         return jsonify({'id': str(post_res)})
 
-    def get(self):
-        # post_res = db.releves.insert_one({'name':'toto', 'age':42})
-        # get_res = db.releves.find_one({'_id': post_res.inserted_id})
-        # del get_res['_id']
-        return jsonify({'releves':'get'})
+    
+@api.route('/releves/<string:releve_id>')
+@api.doc()
+class GetReleves(Resource):
+    def get(self, releve_id):
+        get_res = db.releves.find_one({'_id': ObjectId(releve_id)})
+        if get_res:
+            del get_res['_id']
+            return get_res
+        else:
+            raise NotFound
 
 # test with curl -H "Content-Type: application/json" -X PUT -d "{penis: tachatte}" http://localhost:8000/records
 @api.route('/records')
