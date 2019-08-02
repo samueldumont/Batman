@@ -1,6 +1,6 @@
 import React from "react"
 import { DatePicker, Form, Input, Cascader, Button } from "antd"
-import Layout from '../../components/layout'
+import Layout from "../../components/layout"
 
 const habitats = [
   {
@@ -106,8 +106,11 @@ const secondaryVegetation = [
 const yesno = [{ value: "yes", label: "yes" }, { value: "no", label: "no" }]
 
 class BatRegistrationSubmissionForm extends React.Component {
-  state = {
-    confirmDirty: false,
+  state = {}
+
+  async componentDidMount() {
+    // GET request to the url
+    // prefill some data
   }
 
   handleSubmit = e => {
@@ -126,14 +129,11 @@ class BatRegistrationSubmissionForm extends React.Component {
           }
 
           // should join the values of the coordinates
+
+          // write the values to the server
         })
       }
     })
-  }
-
-  handleConfirmBlur = e => {
-    const { value } = e.target
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value })
   }
 
   render() {
@@ -174,184 +174,187 @@ class BatRegistrationSubmissionForm extends React.Component {
 
     return (
       <Layout>
-      <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-        <Form.Item label="Device number">
-          {getFieldDecorator("email", {
-            rules: [
-              {
-                required: true,
-                message: "Please specify a device number",
-              },
-            ],
-          })(<Input placeholder="Enter a device number" />)}
-        </Form.Item>
-        <Form.Item label="Microphone number">
-          {getFieldDecorator("email", {
-            rules: [
-              {
-                required: true,
-                message: "Please specify a microphone number",
-              },
-            ],
-          })(<Input placeholder="Enter a microphone number" />)}
-        </Form.Item>
-        <Form.Item label="Operator name">
-          {getFieldDecorator("email", {
-            rules: [
-              {
-                required: true,
-                message: "Please specify the operator's name",
-              },
-            ],
-          })(<Input placeholder="Enter the name of the operator" />)}
-        </Form.Item>
-        <Form.Item label="Date of first night of measurement">
-          {getFieldDecorator("date-picker", config)(<DatePicker />)}
-        </Form.Item>
-        <Form.Item label="Location name">
-          {getFieldDecorator("email", {
-            rules: [
-              {
-                required: true,
-                message: "Please specify the location of the measurement",
-              },
-            ],
-          })(<Input placeholder="Enter the location name" />)}
-        </Form.Item>
-        <Form.Item label="Latitude">
-          {getFieldDecorator("email", {
-            rules: [
-              {
-                required: true,
-                message: "Please specify the location's latitude",
-              },
-            ],
-          })(<Input placeholder="Enter the location's latitude" />)}
-        </Form.Item>
-        <Form.Item label="Longitude">
-          {getFieldDecorator("email", {
-            rules: [
-              {
-                required: true,
-                message: "Please specify the location's longitude",
-              },
-            ],
-          })(<Input placeholder="Enter the location's longitude" />)}
-        </Form.Item>
-        <Form.Item label="Habitat Type">
-          {getFieldDecorator("residence", {
-            rules: [
-              {
-                type: "array",
-                required: true,
-                message: "Please specify the habitat type!",
-              },
-            ],
-          })(
-            <Cascader placeholder="Enter the habitat type" options={habitats} />
-          )}
-        </Form.Item>
-        <Form.Item label="Primary Vegetation Type">
-          {getFieldDecorator("residence", {
-            rules: [
-              {
-                type: "array",
-                required: true,
-                message: "Please specify the primary vegetation type!",
-              },
-            ],
-          })(
-            <Cascader
-              placeholder="Enter the primary vegetation type"
-              options={primaryVegetation}
-            />
-          )}
-        </Form.Item>
-        <Form.Item label="Secondary Vegetation Type">
-          {getFieldDecorator("residence", {})(
-            <Cascader
-              placeholder="Enter the secondary vegetation type"
-              options={secondaryVegetation}
-            />
-          )}
-        </Form.Item>
-        <Form.Item label="Maintenance Type">
-          {getFieldDecorator("residence", {
-            rules: [
-              {
-                type: "array",
-                required: true,
-                message: "Please specify the primary vegetation type!",
-              },
-            ],
-          })(
-            <Cascader
-              placeholder="Enter the type of maintenance"
-              options={maintenance}
-            />
-          )}
-        </Form.Item>
-        <Form.Item label="Exposure to sunlight">
-          {getFieldDecorator("residence", {
-            rules: [
-              {
-                type: "array",
-                required: true,
-                message:
-                  "Please specify whether the site is explosed to sunlight!",
-              },
-            ],
-          })(
-            <Cascader
-              placeholder="Specify whether the site is exposed to sunlight"
-              options={yesno}
-            />
-          )}
-        </Form.Item>
-        <Form.Item label="Height">
-          {getFieldDecorator("email", {
-            rules: [
-              {
-                required: true,
-                message: "Please specify the device's positioning height",
-              },
-            ],
-          })(<Input placeholder="Enter the device's positioning height" />)}
-        </Form.Item>
-        <Form.Item label="Weather type">
-          {getFieldDecorator("residence", {
-            rules: [
-              {
-                type: "array",
-                required: true,
-                message: "Please specify the night's weather type!",
-              },
-            ],
-          })(
-            <Cascader
-              placeholder="Specify whether the night's weather type"
-              options={weather}
-            />
-          )}
-        </Form.Item>
-        <Form.Item label="Comments">
-          {getFieldDecorator("email", {})(
-            <Input placeholder="Enter a comment if so desired" />
-          )}
-        </Form.Item>
-        <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Register
-          </Button>
-        </Form.Item>
-      </Form>
+        <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+          <Form.Item label="Device number">
+            {getFieldDecorator("email", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please specify a device number",
+                },
+              ],
+            })(<Input placeholder="Enter a device number" />)}
+          </Form.Item>
+          <Form.Item label="Microphone number">
+            {getFieldDecorator("email", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please specify a microphone number",
+                },
+              ],
+            })(<Input placeholder="Enter a microphone number" />)}
+          </Form.Item>
+          <Form.Item label="Operator name">
+            {getFieldDecorator("email", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please specify the operator's name",
+                },
+              ],
+            })(<Input placeholder="Enter the name of the operator" />)}
+          </Form.Item>
+          <Form.Item label="Date of first night of measurement">
+            {getFieldDecorator("date-picker", config)(<DatePicker />)}
+          </Form.Item>
+          <Form.Item label="Location name">
+            {getFieldDecorator("email", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please specify the location of the measurement",
+                },
+              ],
+            })(<Input placeholder="Enter the location name" />)}
+          </Form.Item>
+          <Form.Item label="Latitude">
+            {getFieldDecorator("email", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please specify the location's latitude",
+                },
+              ],
+            })(<Input placeholder="Enter the location's latitude" />)}
+          </Form.Item>
+          <Form.Item label="Longitude">
+            {getFieldDecorator("email", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please specify the location's longitude",
+                },
+              ],
+            })(<Input placeholder="Enter the location's longitude" />)}
+          </Form.Item>
+          <Form.Item label="Habitat Type">
+            {getFieldDecorator("residence", {
+              rules: [
+                {
+                  type: "array",
+                  required: true,
+                  message: "Please specify the habitat type!",
+                },
+              ],
+            })(
+              <Cascader
+                placeholder="Enter the habitat type"
+                options={habitats}
+              />
+            )}
+          </Form.Item>
+          <Form.Item label="Primary Vegetation Type">
+            {getFieldDecorator("residence", {
+              rules: [
+                {
+                  type: "array",
+                  required: true,
+                  message: "Please specify the primary vegetation type!",
+                },
+              ],
+            })(
+              <Cascader
+                placeholder="Enter the primary vegetation type"
+                options={primaryVegetation}
+              />
+            )}
+          </Form.Item>
+          <Form.Item label="Secondary Vegetation Type">
+            {getFieldDecorator("residence", {})(
+              <Cascader
+                placeholder="Enter the secondary vegetation type"
+                options={secondaryVegetation}
+              />
+            )}
+          </Form.Item>
+          <Form.Item label="Maintenance Type">
+            {getFieldDecorator("residence", {
+              rules: [
+                {
+                  type: "array",
+                  required: true,
+                  message: "Please specify the primary vegetation type!",
+                },
+              ],
+            })(
+              <Cascader
+                placeholder="Enter the type of maintenance"
+                options={maintenance}
+              />
+            )}
+          </Form.Item>
+          <Form.Item label="Exposure to sunlight">
+            {getFieldDecorator("residence", {
+              rules: [
+                {
+                  type: "array",
+                  required: true,
+                  message:
+                    "Please specify whether the site is explosed to sunlight!",
+                },
+              ],
+            })(
+              <Cascader
+                placeholder="Specify whether the site is exposed to sunlight"
+                options={yesno}
+              />
+            )}
+          </Form.Item>
+          <Form.Item label="Height">
+            {getFieldDecorator("email", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please specify the device's positioning height",
+                },
+              ],
+            })(<Input placeholder="Enter the device's positioning height" />)}
+          </Form.Item>
+          <Form.Item label="Weather type">
+            {getFieldDecorator("residence", {
+              rules: [
+                {
+                  type: "array",
+                  required: true,
+                  message: "Please specify the night's weather type!",
+                },
+              ],
+            })(
+              <Cascader
+                placeholder="Specify whether the night's weather type"
+                options={weather}
+              />
+            )}
+          </Form.Item>
+          <Form.Item label="Comments">
+            {getFieldDecorator("email", {})(
+              <Input placeholder="Enter a comment if so desired" />
+            )}
+          </Form.Item>
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit">
+              Save
+            </Button>
+          </Form.Item>
+        </Form>
       </Layout>
     )
   }
 }
 
-const WrappedBatRegistrationSubmissionForm = Form.create({ name: "register" })(
-  BatRegistrationSubmissionForm
-)
+const WrappedBatRegistrationSubmissionForm = Form.create({
+  name: "submissionform",
+})(BatRegistrationSubmissionForm)
 
 export default WrappedBatRegistrationSubmissionForm
