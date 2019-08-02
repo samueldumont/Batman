@@ -30,4 +30,4 @@ RUN gatsby build
 # https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md#non-root-user
 USER node
 
-CMD [ "gatsby", "serve" ]
+CMD [ "gatsby", "serve", "-p", "80" ]
