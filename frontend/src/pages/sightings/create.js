@@ -198,7 +198,7 @@ class BatRegistrationSubmissionForm extends React.Component {
   }
 
   handleSubmit = async e => {
-    let sighting
+    let sighting = {}
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
@@ -206,33 +206,32 @@ class BatRegistrationSubmissionForm extends React.Component {
           if (err) {
             return
           } else {
-
-            // format values before submit
-            return (sighting = {
-              comment: fieldsValue.comment,
-              locationName: fieldsValue.locationName,
-              microphoneNumber: fieldsValue.microphoneNumber,
-              observationAmount: this.state.sighting.observationAmount,
-              endDate: this.state.sighting.endDate,
-              operatorName: fieldsValue.operatorName,
-              deviceNumber: fieldsValue.deviceNumber,
-              height: Number(fieldsValue.height),
-              startDate: fieldsValue['startDate'].format('YYYYMMDD'),
-              habitatType: arrayReducer(fieldsValue.habitatType),
-              isIlluminated: arrayReducer(fieldsValue.isIlluminated),
-              maintenanceType: arrayReducer(fieldsValue.maintenanceType),
-              primaryStructuringElementType: arrayReducer(
-                fieldsValue.primaryStructuringElementType
-              ),
-              secondaryStructuringElementType: arrayReducer(
-                fieldsValue.secondaryStructuringElementType
-              ),
-              weatherType: arrayReducer(fieldsValue.weatherType),
-              locationCoordinates: {
-                lat: this.state.locationCoordinates.lat,
-                lng: this.state.locationCoordinates.lgn
-              }
-            })
+            sighting.comment = fieldsValue.comment
+            // return (sighting = {
+            //   comment: fieldsValue.comment,
+            //   locationName: fieldsValue.locationName,
+            //   microphoneNumber: fieldsValue.microphoneNumber,
+            //   observationAmount: this.state.sighting.observationAmount,
+            //   endDate: this.state.sighting.endDate,
+            //   operatorName: fieldsValue.operatorName,
+            //   deviceNumber: fieldsValue.deviceNumber,
+            //   height: Number(fieldsValue.height),
+            //   startDate: fieldsValue['startDate'].format('YYYYMMDD'),
+            //   habitatType: arrayReducer(fieldsValue.habitatType),
+            //   isIlluminated: arrayReducer(fieldsValue.isIlluminated),
+            //   maintenanceType: arrayReducer(fieldsValue.maintenanceType),
+            //   primaryStructuringElementType: arrayReducer(
+            //     fieldsValue.primaryStructuringElementType
+            //   ),
+            //   secondaryStructuringElementType: arrayReducer(
+            //     fieldsValue.secondaryStructuringElementType
+            //   ),
+            //   weatherType: arrayReducer(fieldsValue.weatherType),
+            //   locationCoordinates: {
+            //     lat: this.state.locationCoordinates.lat,
+            //     lng: this.state.locationCoordinates.lgn
+            //   }
+            // })
           }
         })
       } else {
