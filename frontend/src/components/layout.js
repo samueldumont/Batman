@@ -17,7 +17,7 @@ export default class extends React.Component {
         return (
             <div>
                 <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
-                    <Menu.Item key="mail">
+                    <Menu.Item key="mail">  
                         <Icon type="mail" />Navigation One
                     </Menu.Item>
                     <Menu.Item key="app">
