@@ -33,20 +33,11 @@ api = Api(app,
           description="BATMAN BACKEND")
 
 
-@api.route('/releves')
-@api.doc()
-class PostReleves(Resource):
-
-    def post(self):
-        payload = json.loads(request.data)
-        post_res = db.data.insert_one(payload).inserted_id
-        return jsonify({'id': str(post_res)})
-
-
 @api.route('/releves/<string:releve_id>')
 @api.doc()
-class GetReleves(Resource):
+class Releves(Resource):
     def get(self, releve_id):
+        ''' Retrieve sighting info '''
         get_res = db.data.find_one({'_id': ObjectId(releve_id)})
         if get_res:
             del get_res['_id']
@@ -54,11 +45,17 @@ class GetReleves(Resource):
         else:
             raise NotFound
 
+    def put(self):
+        ''' Upsert a sighting with user input. '''
+        payload = json.loads(request.data)
+        post_res = db.data.insert_one(payload).inserted_id
+        return jsonify({'id': str(post_res)})
 
 @api.route('/records')
 @api.doc()
 class Records(Resource):
-    def put(self):
+    def post(self):
+        ''' Stores scanned SD card info. ''' 
         db.data.insert_one(json.loads(request.data))
         return "OK"
 
