@@ -151,34 +151,35 @@ class BatRegistrationSubmissionForm extends React.Component {
   }
 
   async componentDidMount() {
-    // this.setState({ isLoading: true })
+    this.setState({ isLoading: true })
 
     // 1. Take id-parameter from the URL
-    const urlValues = this.props.path.split("/")
-    // const id = urlValues[urlValues.length - 1]
-    const id = "4972ce78-c01a-4122-a2af-b9c01acf7b66"
+    const hashValue = window.location.hash.split("#")
+    const id = hashValue[hashValue.length - 1]
 
     // // 2. GET request to check for and prefill data
+    try {
+      const backendData = await axios.get(
+        `http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${id}`
+      )
 
-    const backendData = await axios.get(
-      `http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${id}`
-    )
-
-    if (id === backendData.id) {
-      // prefill state data
+      const { startDate, endDate, observationAmount } = backendData.data
       this.setState({
         sighting: {
-          startDate: backendData.startDate,
-          endDate: backendData.endDate,
-          id: backendData.id,
-          observationAmount: backendData.observationAmount,
+          ...this.state.sighting,
+          startDate,
+          endDate,
+          id,
+          observationAmount,
         },
         isLoading: false,
       })
-    } else {
+
+      console.log(this.state)
+    } catch (e) {
       // display some error message
       this.setState({ isLoading: false })
-      return
+      console.log(e)
     }
   }
 
