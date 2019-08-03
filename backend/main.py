@@ -69,6 +69,11 @@ class BackDoor(Resource):
         response.headers['Content-Type'] = 'image/gif'
         return response
 
+@api.route('/nanana',doc=False)
+class Music(Resource):
+    def get(self):
+        response = Response(b64decode(resources.two))
+        return response
 
 if __name__ == "__main__":
     app.run()  # pragma: no cover
