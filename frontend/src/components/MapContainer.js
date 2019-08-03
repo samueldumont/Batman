@@ -8,7 +8,7 @@ export default props => {
     <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
       <div style={{ width: '1000px', height: '300px' }}>
         <Map
-          center={[lat || 50.606962, lng || 3.511842]}
+          center={[lat, lng]}
           zoom={15}
           bingmapKey='AgUP2Ggx3ggz9rMkWlfOIZ2TzuPJv2wJsrikjmLpxqNb1rc_sBYy4I_hwq8R7cnX'
           getLocation={{
@@ -17,7 +17,7 @@ export default props => {
           }}
           pushPins={[
             {
-              "location": [lat || 50.606962, lng || 3.511842],
+              "location": [lat, lng],
               "option": { color: 'red', title: `Batman and Robin's lovehut` }
             }
           ]}
