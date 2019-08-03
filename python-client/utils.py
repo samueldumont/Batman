@@ -22,9 +22,9 @@ def scan(folder):
 
     startDate = str(re.search(r'(\d{8})', files[0], re.IGNORECASE).group(1))
     endDate = str(re.search(r'(\d{8})', files[-1], re.IGNORECASE).group(1))
-    sightingid = str(uuid.uuid4())
 
     observations = []
+    location = {"lat": 0.0, "lng": 0.0}
 
     for file in glob.glob("*.wav"):
         ts = re.search(r'(\d{8})_(\d{6})', file, re.IGNORECASE)
@@ -40,6 +40,14 @@ def scan(folder):
             "duration": duration
         })
 
+    with open("metadata.txt") as metadatafile:
+        metadatacsv = csv.reader(metadatafile, delimiter=',')
+        next(metadatacsv)
+        for row in metadatacsv:
+            if float(row[2]) and float(row[4]):
+                location = {"lat": float(
+                    row[2]), "lng": float(row[4])}
+
     payload = {
         "observationAmount": len(files),
         "observations": observations,
@@ -49,7 +57,7 @@ def scan(folder):
         "startDate": startDate,
         "endDate": endDate,
         "locationName": '',
-        "locationCoordinates": {"lat": 0.0, "lng": 0.0},
+        "locationCoordinates": location,
         "habitatType": '',
         "primaryStructuringElementType": '',
         "secondaryStructuringElementType": '',
