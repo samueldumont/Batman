@@ -44,9 +44,12 @@ def scan(folder):
         metadatacsv = csv.reader(metadatafile, delimiter=',')
         next(metadatacsv)
         for row in metadatacsv:
-            if float(row[2]) and float(row[4]):
-                location = {"lat": float(
-                    row[2]), "lng": float(row[4])}
+            try:
+                if float(row[2]) and float(row[4]):
+                    location = {"lat": float(
+                        row[2]), "lng": float(row[4])}
+            except:
+                print("wrong location data")
 
     payload = {
         "observationAmount": len(files),
