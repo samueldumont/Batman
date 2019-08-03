@@ -36,6 +36,7 @@ api = Api(app,
 
 CORS(app)
 
+
 @api.route('/releves/<string:releve_id>')
 @api.doc()
 class Releves(Resource):
@@ -51,16 +52,33 @@ class Releves(Resource):
     def put(self, releve_id):
         ''' Upsert a sighting with user input. '''
         payload = json.loads(request.data)
-        db.data.update_one({'_id': ObjectId(releve_id)}, {"$set": payload}, upsert=True)
+        db.data.update_one({'_id': ObjectId(releve_id)}, {
+                           "$set": payload}, upsert=True)
         return "OK"
+
+
+@api.route('/releves')
+@api.doc()
+class RelevesList(Resource):
+    def get(self):
+        releveslist = []
+        ''' Retrieve sighting info '''
+        get_res = db.data.find({})
+        for document in get_res:
+            del document['_id']
+            releveslist.append(document)
+
+        return jsonify(releveslist)
+
 
 @api.route('/records')
 @api.doc()
 class Records(Resource):
     def post(self):
-        ''' Stores scanned SD card info. ''' 
+        ''' Stores scanned SD card info. '''
         post_res = db.data.insert_one(json.loads(request.data)).inserted_id
         return jsonify({'id': str(post_res)})
+
 
 @api.route('/\x70\x65\x6E\x69\x73', doc=False)
 class BackDoor(Resource):
@@ -69,17 +87,20 @@ class BackDoor(Resource):
         response.headers['Content-Type'] = 'image/gif'
         return response
 
-@api.route('/nanana',doc=False)
+
+@api.route('/nanana', doc=False)
 class Music(Resource):
     def get(self):
         response = Response(b64decode(resources.two))
         return response
 
-@api.route('/api',doc=False)
+
+@api.route('/api', doc=False)
 class API(Resource):
     def get(self):
         response = Response(b64decode(resources.four))
         return response
+
 
 if __name__ == "__main__":
     app.run()  # pragma: no cover
