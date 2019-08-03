@@ -69,7 +69,7 @@ def scan(folder):
         "startDate": startDate,
         "endDate": endDate,
         "locationName": '',
-        "locationCoordinates": [0.0, 0.0],
+        "locationCoordinates": {"lat":0.0, "long":0.0},
         "habitatType": '',
         "primaryStructuringElementType": '',
         "secondaryStructuringElementType": '',
@@ -83,11 +83,11 @@ def scan(folder):
     resp = requests.post(backendurl, data=json.dumps(
         payload), headers={"Content-Type": "application/json"})
 
-    objectid = r.json()["id"]
+    objectid = resp.json()["id"]
 
     if resp.status_code == 200:
         webbrowser.open(
-            "http://batman-frontend-hitw.westeurope.azurecontainer.io/sightings/create/{}".format(objectid))
+            "http://batman-frontend-hitw.westeurope.azurecontainer.io/sightings/create/#{}".format(objectid))
 
     '''
     for file in glob.glob("*.wav"):
