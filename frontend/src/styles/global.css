@@ -1,15 +1,8 @@
 .main-layout {
-<<<<<<< Updated upstream
-    max-width: 1120px;
-    margin: 3em auto 1em !important;
-    float: none !important;
-    }
-=======
-  max-width: 1200px;
-  margin: 1em auto 1em !important;
+  max-width: 1120px;
+  margin: 3em auto 1em !important;
   float: none !important;
 }
->>>>>>> Stashed changes
 
 .ant-menu-horizontal {
   display: flex;

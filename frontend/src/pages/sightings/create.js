@@ -4,12 +4,10 @@ import axios from "axios"
 import moment from "moment"
 
 import Layout from "../../components/layout"
-<<<<<<< Updated upstream
-import 'antd/dist/antd.css'
-import '../../styles/global.css'
-=======
+import "antd/dist/antd.css"
+import "../../styles/global.css"
+
 // import Map from "../../components/MapContainer"
->>>>>>> Stashed changes
 
 const habitats = [
   {
