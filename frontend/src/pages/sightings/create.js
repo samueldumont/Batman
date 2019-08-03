@@ -392,6 +392,7 @@ class BatRegistrationSubmissionForm extends React.Component {
                       <Map
                         location={sighting.locationCoordinates}
                         addPushPinOnClick={this.onMapClick}
+                        mapStyle={{ width: '1000px', height: '300px' }}
                       />
                     </div>
                   )}

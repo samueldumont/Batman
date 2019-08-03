@@ -6,7 +6,7 @@ export default props => {
 
   return (
     <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-      <div style={{ width: '1000px', height: '300px' }}>
+      <div style={props.mapStyle}>
         <Map
           center={[lat, lng]}
           zoom={15}
