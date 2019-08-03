@@ -1,5 +1,7 @@
 import React from 'react'
 import { Menu, Icon } from 'antd'
+import logo from './logo.png'
+import gradient from './gradient.png'
 
 export default class extends React.Component {
     state = {
@@ -26,8 +28,8 @@ export default class extends React.Component {
                     </Menu.Item>
                 </Menu>
                 <div style={{ flex: 1 }}>
-                    <img src={'../logo.png'} style={{ paddingLeft: '2rem', paddingTop: '1rem', paddingBottom: '1rem' }} alt='logo' />
-                    <img src={'../gradient.png'} style={{ height: 150, width: '100%' }} />
+                    <img src={logo} style={{ paddingLeft: '2rem', paddingTop: '1rem', paddingBottom: '1rem' }} alt='logo' />
+                    <img src={gradient} style={{ height: 150, width: '100%' }} />
                 </div>
                 <div className='main-layout'>
                     {this.props.children}
