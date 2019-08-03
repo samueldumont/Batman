@@ -61,7 +61,7 @@ export default () => {
                     <Card
                         style={{ width: 350 }}
                         cover={<div style={{ height: '350px' }}>
-                            <Map mapStyle={{ height: '350px', width: '350px'}} location={{ lat: 50.606962, lng: 3.511842 }} />s
+                            <Map mapStyle={{ height: '350px', width: '350px'}} location={{ lat: 50.606962, lng: 3.511842 }} />
                         </div>}
                         actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
                     >
