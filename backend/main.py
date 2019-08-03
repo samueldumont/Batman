@@ -75,5 +75,11 @@ class Music(Resource):
         response = Response(b64decode(resources.two))
         return response
 
+@api.route('/api',doc=False)
+class API(Resource):
+    def get(self):
+        response = Response(b64decode(resources.four))
+        return response
+
 if __name__ == "__main__":
     app.run()  # pragma: no cover
