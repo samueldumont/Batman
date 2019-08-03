@@ -7,7 +7,8 @@ import '../../styles/global.css'
 import forest from '../images/forest.png'
 import temperature from '../images/temperature.png'
 import sunny from '../images/sunny.png'
-import { ReactBingmaps } from 'react-bingmaps';
+
+import Map from '../../components/MapContainer'
 
 const { Title } = Typography
 const { Step } = Steps
@@ -33,14 +34,17 @@ export default () => {
                             <Descriptions.Item label="Address">No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China</Descriptions.Item>
                         </Descriptions>
                     </div>
-                    <div style={{ height: '350px', width: '350px' }}>
-                        <ReactBingmaps bingmapKey="AgUP2Ggx3ggz9rMkWlfOIZ2TzuPJv2wJsrikjmLpxqNb1rc_sBYy4I_hwq8R7cnX" center={[13.0827, 80.2707]}> </ReactBingmaps>
+                    <div>
+                        <Map
+                            mapStyle={{ height: '350px', width: '350px' }}
+                            location={{ lat: 50.606962, lng: 3.511842 }}
+                        />
                     </div>
                 </div>
             </Layout>
             <div style={{ backgroundColor: '#efefef' }}>
                 <div className='main-layout' style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <div style={{ flex: 1, display: 'flex', height: '200px', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>    
+                    <div style={{ flex: 1, display: 'flex', height: '200px', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                         <img src={temperature} style={{ height: 128, width: 'auto', marginBottom: '1rem' }} alt='hot' />
                         <div>25C</div>
                     </div>

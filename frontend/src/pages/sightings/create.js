@@ -2,6 +2,7 @@ import React from 'react'
 import { DatePicker, Form, Input, Cascader, Button, Spin } from 'antd'
 import axios from 'axios'
 import moment from 'moment'
+import { Redirect } from 'react-router-dom'
 
 import Layout from '../../components/layout'
 import 'antd/dist/antd.css'
@@ -140,7 +141,7 @@ class BatRegistrationSubmissionForm extends React.Component {
       height: '',
       id: '',
       isIlluminated: '',
-      locationCoordinates: { lat: null, lng: null },
+      locationCoordinates: { lat: 50.606962, lng: 3.511842 },
       locationName: '',
       maintenanceType: '',
       microphoneNumber: '',
@@ -167,6 +168,7 @@ class BatRegistrationSubmissionForm extends React.Component {
         `http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${id}`
       )
 
+      console.log(backendData)
       const {
         startDate,
         endDate,
@@ -180,12 +182,14 @@ class BatRegistrationSubmissionForm extends React.Component {
           endDate,
           id,
           observationAmount,
-          locationCoordinates
+          locationCoordinates: {
+            lat: locationCoordinates.lat || this.state.sighting.locationCoordinates.lat,
+            lng: locationCoordinates.lng || this.state.sighting.locationCoordinates.lng
+          }
         },
         isLoading: false
       })
 
-      console.log(this.state)
     } catch (e) {
       // display some error message
       this.setState({ isLoading: false })
@@ -226,8 +230,8 @@ class BatRegistrationSubmissionForm extends React.Component {
             ),
             weatherType: arrayReducer(fieldsValue.weatherType),
             locationCoordinates: {
-              lat: Number(fieldsValue.latitude),
-              lng: Number(fieldsValue.longitude)
+              lat: this.state.locationCoordinates.lat,
+              lng: this.state.locationCoordinates.lgn
             }
           })
         })
@@ -267,6 +271,8 @@ class BatRegistrationSubmissionForm extends React.Component {
         weatherType: ''
       }
     })
+
+    return <Redirect to="/sightings/view/" />
   }
 
   onMapClick = location => {
@@ -380,18 +386,13 @@ class BatRegistrationSubmissionForm extends React.Component {
                 </Form.Item>
                 <Form.Item label='Device Position'>
                   {getFieldDecorator('devicePosition', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please record the devices location on the map'
-                      }
-                    ]
                   })(
                     <div>
                       <p>Please click on the map where the device was placed</p>
                       <Map
                         location={sighting.locationCoordinates}
                         addPushPinOnClick={this.onMapClick}
+                        mapStyle={{ width: '1000px', height: '300px' }}
                       />
                     </div>
                   )}
