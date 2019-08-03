@@ -205,41 +205,43 @@ class BatRegistrationSubmissionForm extends React.Component {
         this.props.form.validateFields((err, fieldsValue) => {
           if (err) {
             return
+          } else {
+
+            // format values before submit
+            return (sighting = {
+              comment: fieldsValue.comment,
+              locationName: fieldsValue.locationName,
+              microphoneNumber: fieldsValue.microphoneNumber,
+              observationAmount: this.state.sighting.observationAmount,
+              endDate: this.state.sighting.endDate,
+              operatorName: fieldsValue.operatorName,
+              deviceNumber: fieldsValue.deviceNumber,
+              height: Number(fieldsValue.height),
+              startDate: fieldsValue['startDate'].format('YYYYMMDD'),
+              habitatType: arrayReducer(fieldsValue.habitatType),
+              isIlluminated: arrayReducer(fieldsValue.isIlluminated),
+              maintenanceType: arrayReducer(fieldsValue.maintenanceType),
+              primaryStructuringElementType: arrayReducer(
+                fieldsValue.primaryStructuringElementType
+              ),
+              secondaryStructuringElementType: arrayReducer(
+                fieldsValue.secondaryStructuringElementType
+              ),
+              weatherType: arrayReducer(fieldsValue.weatherType),
+              locationCoordinates: {
+                lat: this.state.locationCoordinates.lat,
+                lng: this.state.locationCoordinates.lgn
+              }
+            })
           }
-
-          // format values before submit
-          return (sighting = {
-            comment: fieldsValue.comment,
-            locationName: fieldsValue.locationName,
-            microphoneNumber: Number(fieldsValue.microphoneNumber),
-            observationAmount: this.state.sighting.observationAmount,
-            endDate: this.state.sighting.endDate,
-            operatorName: fieldsValue.operatorName,
-            deviceNumber: Number(fieldsValue.deviceNumber),
-            height: Number(fieldsValue.height),
-            startDate: fieldsValue['startDate'].format('YYYYMMDD'),
-            habitatType: arrayReducer(fieldsValue.habitatType),
-            isIlluminated: arrayReducer(fieldsValue.isIlluminated),
-            maintenanceType: arrayReducer(fieldsValue.maintenanceType),
-            primaryStructuringElementType: arrayReducer(
-              fieldsValue.primaryStructuringElementType
-            ),
-
-            secondaryStructuringElementType: arrayReducer(
-              fieldsValue.secondaryStructuringElementType
-            ),
-            weatherType: arrayReducer(fieldsValue.weatherType),
-            locationCoordinates: {
-              lat: this.state.locationCoordinates.lat,
-              lng: this.state.locationCoordinates.lgn
-            }
-          })
         })
+      } else {
+        console.log('something went wrong')
       }
     })
 
-    JSON.stringify(sighting)
     console.log(sighting)
+    JSON.stringify(sighting)
 
     await axios.put(
       `http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${
