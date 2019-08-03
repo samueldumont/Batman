@@ -1,5 +1,5 @@
 import React from "react"
-import { ReactBingmaps as Map } from "react-bingmaps"
+import { ReactBingmaps } from "react-bingmaps"
 
 export default props => {
   return (
