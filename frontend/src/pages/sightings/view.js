@@ -27,75 +27,71 @@ export default () => {
                     </Steps>
                 </div>
                 <div style={{ display: 'flex', flex: 1, justifyContent: 'space-between' }}>
-                    <div style={{display: 'flex', flex: 1, flexDirection: 'column'}}>
-                    <Row style={{ flex: 1 }} type='flex' gutter={20}>
-                        <Col className="gutter-row" span={6}>
-                            <Statistic title="Number of observations" value={249} suffix='recordings' />
-                        </Col>
-                        <Col className="gutter-row" span={6}>
-                            <Statistic title="Primary Structuring Element" value={'Bande boisée et alignement d\'arbre'} />
-                        </Col>
-                        <Col className="gutter-row" span={6}>
-                            <Statistic title="Maintenance" value={'prairie - site pâturé (avec animaux présents)'} />
-                        </Col>
-                        <Col className="gutter-row" span={6}>
-                            <Statistic title="Height" value={'150'} suffix='cm' />
-                        </Col>
-                    </Row>
-                    <Row style={{ flex: 1 }} type='flex' gutter={20}>
-                        <Col className="gutter-row" span={6}>
-                            <Statistic title="Date" value={'01/08/2019'} />
-                        </Col>
-                        <Col className="gutter-row" span={6}>
-                            <Statistic title="Location" value={'Eprave - Au pècheron'} />
-                        </Col>
-                        <Col className="gutter-row" span={6}>
-                            <Statistic title="Habitat" value={'Cours d\'eau - ruisseau (L < 3m)'} />
-                        </Col>
-                        <Col className="gutter-row" span={6}>
-                            <Statistic title="Illuminated" value={'no'} />
-                        </Col>
-                    </Row>
+                    <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
+                        <Row style={{ flex: 1 }} type='flex' gutter={20}>
+                            <Col className="gutter-row" span={6}>
+                                <Statistic title="Number of observations" value={249} suffix='recordings' />
+                            </Col>
+                            <Col className="gutter-row" span={6}>
+                                <Statistic title="Primary Structuring Element" value={'Bande boisée et alignement d\'arbre'} />
+                            </Col>
+                            <Col className="gutter-row" span={6}>
+                                <Statistic title="Maintenance" value={'prairie - site pâturé (avec animaux présents)'} />
+                            </Col>
+                            <Col className="gutter-row" span={6}>
+                                <Statistic title="Height" value={'150'} suffix='cm' />
+                            </Col>
+                        </Row>
+                        <Row style={{ flex: 1 }} type='flex' gutter={20}>
+                            <Col className="gutter-row" span={6}>
+                                <Statistic title="Date" value={'01/08/2019'} />
+                            </Col>
+                            <Col className="gutter-row" span={6}>
+                                <Statistic title="Location" value={'Eprave - Au pècheron'} />
+                            </Col>
+                            <Col className="gutter-row" span={6}>
+                                <Statistic title="Habitat" value={'Cours d\'eau - ruisseau (L < 3m)'} />
+                            </Col>
+                            <Col className="gutter-row" span={6}>
+                                <Statistic title="Illuminated" value={'no'} />
+                            </Col>
+                        </Row>
                     </div>
 
                     <Card
                         style={{ width: 350 }}
                         cover={<div style={{ height: '350px' }}>
-                            <ReactBingmaps bingmapKey="AgUP2Ggx3ggz9rMkWlfOIZ2TzuPJv2wJsrikjmLpxqNb1rc_sBYy4I_hwq8R7cnX" center={[13.0827, 80.2707]}> </ReactBingmaps>
+                            <Map mapStyle={{ height: '350px', width: '350px'}} location={{ lat: 50.606962, lng: 3.511842 }} />s
                         </div>}
                         actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
                     >
                         <Meta
-                            avatar={<Avatar src="https://cdn0.iconfinder.com/data/icons/profile-lipo-glyph/64/profile_user_character-29-512.png " />}
-                            title="Batman"
-                            description="Really enjoyed my time with the bats. Rated 7 stars out of 5."
-                        />
+                        avatar={<Avatar src="https://cdn0.iconfinder.com/data/icons/profile-lipo-glyph/64/profile_user_character-29-512.png " />}
+                        title="Batman"
+                        description="Really enjoyed my time with the bats. Rated 7 stars out of 5."
+                    />
                     </Card>
 
 
                 </div>
             </Layout>
-            <div style={{ backgroundColor: '#efefef' }}>
-                <div className='main-layout' style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <div style={{ flex: 1, display: 'flex', height: '200px', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                        <img src={temperature} style={{ height: 128, width: 'auto', marginBottom: '1rem' }} alt='hot' />
-                        <div>25C</div>
-                    </div>
-                    <div style={{ flex: 1, display: 'flex', height: '200px', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                        <img src={sunny} style={{ height: 128, width: 'auto', marginBottom: '1rem' }} alt='sunny' />
-                        <div><span style={{ textAlign: 'center' }}>Mostly sunny</span></div>
-                    </div>
-                    <div style={{ flex: 1, display: 'flex', height: '200px', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                        <img src={forest} style={{ height: 128, width: 'auto', marginBottom: '1rem' }} alt='forest' />
-                        <div><span style={{ textAlign: 'center' }}>Forest environment</span></div>
-                    </div>
+        <div style={{ backgroundColor: '#efefef' }}>
+            <div className='main-layout' style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ flex: 1, display: 'flex', height: '200px', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <img src={temperature} style={{ height: 128, width: 'auto', marginBottom: '1rem' }} alt='hot' />
+                    <div>25C</div>
+                </div>
+                <div style={{ flex: 1, display: 'flex', height: '200px', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <img src={sunny} style={{ height: 128, width: 'auto', marginBottom: '1rem' }} alt='sunny' />
+                    <div><span style={{ textAlign: 'center' }}>Mostly sunny</span></div>
+                </div>
+                <div style={{ flex: 1, display: 'flex', height: '200px', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                    <img src={forest} style={{ height: 128, width: 'auto', marginBottom: '1rem' }} alt='forest' />
+                    <div><span style={{ textAlign: 'center' }}>Forest environment</span></div>
                 </div>
             </div>
-            <div className='main-layout'>
-                <div style={{ height: '350px', width: '350px' }}>
-                    <ReactBingmaps bingmapKey="AgUP2Ggx3ggz9rMkWlfOIZ2TzuPJv2wJsrikjmLpxqNb1rc_sBYy4I_hwq8R7cnX" center={[13.0827, 80.2707]}> </ReactBingmaps>
-                </div>
-            </div>
+        </div>
+           
         </div >
     )
 }               
