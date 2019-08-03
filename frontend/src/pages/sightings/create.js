@@ -1,164 +1,164 @@
-import React from "react"
-import { DatePicker, Form, Input, Cascader, Button, Spin } from "antd"
-import axios from "axios"
-import moment from "moment"
+import React from 'react'
+import { DatePicker, Form, Input, Cascader, Button, Spin } from 'antd'
+import axios from 'axios'
+import moment from 'moment'
 
-import Layout from "../../components/layout"
-import "antd/dist/antd.css"
-import "../../styles/global.css"
+import Layout from '../../components/layout'
+import 'antd/dist/antd.css'
+import '../../styles/global.css'
 
-import Map from "../../components/MapContainer"
+import Map from '../../components/MapContainer'
 
 const habitats = [
   {
-    value: "Cavité - carrière, mine et grotte",
-    label: "Cavité - carrière, mine et grotte",
+    value: 'Cavité - carrière, mine et grotte',
+    label: 'Cavité - carrière, mine et grotte'
   },
   {
-    value: "Bâtiments",
-    label: "Bâtiments",
+    value: 'Bâtiments',
+    label: 'Bâtiments'
   },
   {
     value: "Plan d'eau - mare",
     label: "Plan d'eau - mare",
     children: [
       {
-        value: "< 50m²",
-        label: "< 50m²",
+        value: '< 50m²',
+        label: '< 50m²'
       },
       {
-        value: "> 50m²",
-        label: "> 50m²",
-      },
-    ],
+        value: '> 50m²',
+        label: '> 50m²'
+      }
+    ]
   },
   {
     value: "Cours d'eau",
     label: "Cours d'eau",
     children: [
       {
-        value: "fleuves et gd rivières (L >10 m)",
-        label: "fleuves et gd rivières (L >10 m)",
+        value: 'fleuves et gd rivières (L >10 m)',
+        label: 'fleuves et gd rivières (L >10 m)'
       },
-      { value: "ruisseau (L < 3m)", label: "ruisseau (L < 3m)" },
-      { value: "rivière (3m< L< 10m)", label: "rivière (3m< L< 10m)" },
-    ],
+      { value: 'ruisseau (L < 3m)', label: 'ruisseau (L < 3m)' },
+      { value: 'rivière (3m< L< 10m)', label: 'rivière (3m< L< 10m)' }
+    ]
   },
-  { value: "Milieux rocheux", label: "Milieux rocheux" },
-  { value: "Forêt feuillue", label: "Forêt feuillue" },
-  { value: "Forêt résineuse", label: "Forêt résineuse" },
-  { value: "Forêt mixte", label: "Forêt mixte" },
-  { value: "Mise à blanc", label: "Mise à blanc" },
+  { value: 'Milieux rocheux', label: 'Milieux rocheux' },
+  { value: 'Forêt feuillue', label: 'Forêt feuillue' },
+  { value: 'Forêt résineuse', label: 'Forêt résineuse' },
+  { value: 'Forêt mixte', label: 'Forêt mixte' },
+  { value: 'Mise à blanc', label: 'Mise à blanc' }
 ]
 
 const primaryVegetation = [
   {
     value: "Bande boisée et alignement d'arbres",
-    label: "Bande boisée et alignement d'arbres",
+    label: "Bande boisée et alignement d'arbres"
   },
-  { value: "Haie", label: "Haie" },
-  { value: "Arbre isolé", label: "Arbre isolé" },
-  { value: "buissons isolés", label: "buissons isolés" },
+  { value: 'Haie', label: 'Haie' },
+  { value: 'Arbre isolé', label: 'Arbre isolé' },
+  { value: 'buissons isolés', label: 'buissons isolés' }
 ]
 
 const weather = [
   {
-    value: "nuit calme",
-    label: "nuit calme",
+    value: 'nuit calme',
+    label: 'nuit calme'
   },
-  { value: "nuit pluvieuse", label: "nuit pluvieuse" },
-  { value: "nuit orageuse", label: "nuit orageuse" },
+  { value: 'nuit pluvieuse', label: 'nuit pluvieuse' },
+  { value: 'nuit orageuse', label: 'nuit orageuse' }
 ]
 
 const maintenance = [
   {
-    value: "Eau - présence de végétation aquatique flottante",
-    label: "Eau - présence de végétation aquatique flottante",
+    value: 'Eau - présence de végétation aquatique flottante',
+    label: 'Eau - présence de végétation aquatique flottante'
   },
   {
-    value: "Forêt",
-    label: "Forêt",
+    value: 'Forêt',
+    label: 'Forêt',
     children: [
       {
-        value: "peuplement jeune ( < 50 cm diam)",
-        label: "peuplement jeune ( < 50 cm diam)",
+        value: 'peuplement jeune ( < 50 cm diam)',
+        label: 'peuplement jeune ( < 50 cm diam)'
       },
       {
-        value: "peuplement avec gros bois ( > 50 cm diam)",
-        label: "peuplement avec gros bois ( > 50 cm diam)",
-      },
-    ],
+        value: 'peuplement avec gros bois ( > 50 cm diam)',
+        label: 'peuplement avec gros bois ( > 50 cm diam)'
+      }
+    ]
   },
   {
-    value: "Prairie",
-    label: "Prairie",
+    value: 'Prairie',
+    label: 'Prairie',
     children: [
       {
-        value: "site pâturé (avec animaux présents)",
-        label: "site pâturé (avec animaux présents)",
+        value: 'site pâturé (avec animaux présents)',
+        label: 'site pâturé (avec animaux présents)'
       },
-      { value: "site fauché (récemment)", label: "site fauché (récemment)" },
-      { value: "site non fauché", label: "site non fauché" },
-    ],
-  },
+      { value: 'site fauché (récemment)', label: 'site fauché (récemment)' },
+      { value: 'site non fauché', label: 'site non fauché' }
+    ]
+  }
 ]
 
 const secondaryVegetation = [
   {
-    value: "Layons forestier",
-    label: "Layons forestier",
+    value: 'Layons forestier',
+    label: 'Layons forestier'
   },
   {
-    value: "Route (induré, circulation véhicule rapide)",
-    label: "Route (induré, circulation véhicule rapide)",
+    value: 'Route (induré, circulation véhicule rapide)',
+    label: 'Route (induré, circulation véhicule rapide)'
   },
   {
-    value: "Chemin (induré, circulation véhicule lents)",
-    label: "Chemin (induré, circulation véhicule lents)",
+    value: 'Chemin (induré, circulation véhicule lents)',
+    label: 'Chemin (induré, circulation véhicule lents)'
   },
   {
-    value: "Sentier (non induré - circulation piétonne)",
-    label: "Sentier (non induré - circulation piétonne)",
+    value: 'Sentier (non induré - circulation piétonne)',
+    label: 'Sentier (non induré - circulation piétonne)'
   },
-  { value: "Autre", label: "Autre" },
+  { value: 'Autre', label: 'Autre' }
 ]
 
-const yesno = [{ value: "yes", label: "yes" }, { value: "no", label: "no" }]
+const yesno = [{ value: 'yes', label: 'yes' }, { value: 'no', label: 'no' }]
 
 const arrayReducer = array => {
-  return array.join(" - ")
+  return array.join(' - ')
 }
 
 class BatRegistrationSubmissionForm extends React.Component {
   state = {
     isLoading: false,
     sighting: {
-      comment: "",
-      deviceNumber: "",
-      endDate: "",
-      habitatType: "",
-      height: "",
-      id: "",
-      isIlluminated: "",
-      locationCoordinates: { lat: "", long: "" },
-      locationName: "",
-      maintenanceType: "",
-      microphoneNumber: "",
-      observationAmount: "",
+      comment: '',
+      deviceNumber: '',
+      endDate: '',
+      habitatType: '',
+      height: '',
+      id: '',
+      isIlluminated: '',
+      locationCoordinates: { lat: null, lng: null },
+      locationName: '',
+      maintenanceType: '',
+      microphoneNumber: '',
+      observationAmount: '',
       observations: [],
-      operatorName: "",
-      primaryStructuringElementType: "",
-      secondaryStructuringElementType: "",
-      startDate: "",
-      weatherType: "",
-    },
+      operatorName: '',
+      primaryStructuringElementType: '',
+      secondaryStructuringElementType: '',
+      startDate: '',
+      weatherType: ''
+    }
   }
 
   async componentDidMount() {
     this.setState({ isLoading: true })
 
     // 1. Take id-parameter from the URL
-    const hashValue = window.location.hash.split("#")
+    const hashValue = window.location.hash.split('#')
     const id = hashValue[hashValue.length - 1]
 
     // // 2. GET request to check for and prefill data
@@ -167,7 +167,12 @@ class BatRegistrationSubmissionForm extends React.Component {
         `http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${id}`
       )
 
-      const { startDate, endDate, observationAmount } = backendData.data
+      const {
+        startDate,
+        endDate,
+        observationAmount,
+        locationCoordinates
+      } = backendData.data
       this.setState({
         sighting: {
           ...this.state.sighting,
@@ -175,8 +180,9 @@ class BatRegistrationSubmissionForm extends React.Component {
           endDate,
           id,
           observationAmount,
+          locationCoordinates
         },
-        isLoading: false,
+        isLoading: false
       })
 
       console.log(this.state)
@@ -207,7 +213,7 @@ class BatRegistrationSubmissionForm extends React.Component {
             operatorName: fieldsValue.operatorName,
             deviceNumber: Number(fieldsValue.deviceNumber),
             height: Number(fieldsValue.height),
-            startDate: fieldsValue["startDate"].format("YYYYMMDD"),
+            startDate: fieldsValue['startDate'].format('YYYYMMDD'),
             habitatType: arrayReducer(fieldsValue.habitatType),
             isIlluminated: arrayReducer(fieldsValue.isIlluminated),
             maintenanceType: arrayReducer(fieldsValue.maintenanceType),
@@ -221,8 +227,8 @@ class BatRegistrationSubmissionForm extends React.Component {
             weatherType: arrayReducer(fieldsValue.weatherType),
             locationCoordinates: {
               lat: Number(fieldsValue.latitude),
-              long: Number(fieldsValue.longitude),
-            },
+              lng: Number(fieldsValue.longitude)
+            }
           })
         })
       }
@@ -232,37 +238,50 @@ class BatRegistrationSubmissionForm extends React.Component {
     console.log(sighting)
 
     await axios.put(
-      `http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${this.state.sighting.id}`,
+      `http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${
+      this.state.sighting.id
+      }`,
       sighting
     )
 
     this.setState({
       isLoading: false,
       sighting: {
-        comment: "",
-        deviceNumber: "",
-        endDate: "",
-        habitatType: "",
-        height: "",
-        id: "",
-        isIlluminated: "",
-        locationCoordinates: { lat: "", long: "" },
-        locationName: "",
-        maintenanceType: "",
-        microphoneNumber: "",
-        observationAmount: "",
+        comment: '',
+        deviceNumber: '',
+        endDate: '',
+        habitatType: '',
+        height: '',
+        id: '',
+        isIlluminated: '',
+        locationCoordinates: { lat: '', lng: '' },
+        locationName: '',
+        maintenanceType: '',
+        microphoneNumber: '',
+        observationAmount: '',
         observations: [],
-        operatorName: "",
-        primaryStructuringElementType: "",
-        secondaryStructuringElementType: "",
-        startDate: "",
-        weatherType: "",
-      },
+        operatorName: '',
+        primaryStructuringElementType: '',
+        secondaryStructuringElementType: '',
+        startDate: '',
+        weatherType: ''
+      }
     })
   }
 
   onMapClick = location => {
-    console.log(location)
+    this.setState({
+      ...this.state,
+      sighting: {
+        ...this.state.sighting,
+        locationCoordinates: {
+          lat: location.latitude,
+          lng: location.longitude
+        }
+      }
+    })
+
+    console.log(this.state)
   }
 
   render() {
@@ -273,228 +292,231 @@ class BatRegistrationSubmissionForm extends React.Component {
       initialValue: sighting.startDate || moment(),
       rules: [
         {
-          type: "object",
+          type: 'object',
           required: true,
-          message: "Please select a date!",
-        },
-      ],
+          message: 'Please select a date!'
+        }
+      ]
     }
 
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 },
+        sm: { span: 8 }
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 },
-      },
+        sm: { span: 16 }
+      }
     }
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {
           span: 24,
-          offset: 0,
+          offset: 0
         },
         sm: {
           span: 16,
-          offset: 8,
-        },
-      },
+          offset: 8
+        }
+      }
     }
 
     return (
       <Layout>
         {isLoading ? (
-          <Spin size="large" />
+          <Spin size='large' />
         ) : (
-          <div>
-            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-              <Form.Item label="Date of first night of measurement">
-                {getFieldDecorator("startDate", config)(<DatePicker />)}
-              </Form.Item>
-              <Form.Item label="Number of bat observations">
-                {getFieldDecorator("observationAmount", {
-                  initialValue: sighting.observationAmount,
-                })(<Input disabled />)}
-              </Form.Item>
-              <Form.Item label="Device number">
-                {getFieldDecorator("deviceNumber", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please specify a device number",
-                    },
-                  ],
-                })(<Input placeholder="Enter a device number" />)}
-              </Form.Item>
-              <Form.Item label="Microphone number">
-                {getFieldDecorator("microphoneNumber", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please specify a microphone number",
-                    },
-                  ],
-                })(<Input placeholder="Enter a microphone number" />)}
-              </Form.Item>
-              <Form.Item label="Operator name">
-                {getFieldDecorator("operatorName", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please specify the operator's name",
-                    },
-                  ],
-                })(<Input placeholder="Enter the name of the operator" />)}
-              </Form.Item>
+            <div>
+              <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+                <Form.Item label='Date of first night of measurement'>
+                  {getFieldDecorator('startDate', config)(<DatePicker />)}
+                </Form.Item>
+                <Form.Item label='Number of bat observations'>
+                  {getFieldDecorator('observationAmount', {
+                    initialValue: sighting.observationAmount
+                  })(<Input disabled />)}
+                </Form.Item>
+                <Form.Item label='Device number'>
+                  {getFieldDecorator('deviceNumber', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please specify a device number'
+                      }
+                    ]
+                  })(<Input placeholder='Enter a device number' />)}
+                </Form.Item>
+                <Form.Item label='Microphone number'>
+                  {getFieldDecorator('microphoneNumber', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please specify a microphone number'
+                      }
+                    ]
+                  })(<Input placeholder='Enter a microphone number' />)}
+                </Form.Item>
+                <Form.Item label='Operator name'>
+                  {getFieldDecorator('operatorName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: "Please specify the operator's name"
+                      }
+                    ]
+                  })(<Input placeholder='Enter the name of the operator' />)}
+                </Form.Item>
 
-              <Form.Item label="Location name">
-                {getFieldDecorator("locationName", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please specify the location of the measurement",
-                    },
-                  ],
-                })(<Input placeholder="Enter the location name" />)}
-              </Form.Item>
-              <Form.Item label="Device Position">
-                {getFieldDecorator("devicePosition", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please record the devices location on the map",
-                    },
-                  ],
-                })(
-                  <div>
-                    <p>Please click on the map where the device was placed</p>
-                    <Map addPushPinOnClick={this.onMapClick} />
-                  </div>
-                )}
-              </Form.Item>
-              <Form.Item label="Habitat Type">
-                {getFieldDecorator("habitatType", {
-                  rules: [
-                    {
-                      type: "array",
-                      required: true,
-                      message: "Please specify the habitat type!",
-                    },
-                  ],
-                })(
-                  <Cascader
-                    placeholder="Enter the habitat type"
-                    options={habitats}
-                  />
-                )}
-              </Form.Item>
-              <Form.Item label="Primary Vegetation Type">
-                {getFieldDecorator("primaryStructuringElementType", {
-                  rules: [
-                    {
-                      type: "array",
-                      required: true,
-                      message: "Please specify the primary vegetation type!",
-                    },
-                  ],
-                })(
-                  <Cascader
-                    placeholder="Enter the primary vegetation type"
-                    options={primaryVegetation}
-                  />
-                )}
-              </Form.Item>
-              <Form.Item label="Secondary Vegetation Type">
-                {getFieldDecorator("secondaryStructuringElementType", {})(
-                  <Cascader
-                    placeholder="Enter the secondary vegetation type"
-                    options={secondaryVegetation}
-                  />
-                )}
-              </Form.Item>
-              <Form.Item label="Maintenance Type">
-                {getFieldDecorator("maintenanceType", {
-                  rules: [
-                    {
-                      type: "array",
-                      required: true,
-                      message: "Please specify the primary vegetation type!",
-                    },
-                  ],
-                })(
-                  <Cascader
-                    placeholder="Enter the type of maintenance"
-                    options={maintenance}
-                  />
-                )}
-              </Form.Item>
-              <Form.Item label="Exposure to sunlight">
-                {getFieldDecorator("isIlluminated", {
-                  rules: [
-                    {
-                      type: "array",
-                      required: true,
-                      message:
-                        "Please specify whether the site is explosed to sunlight!",
-                    },
-                  ],
-                })(
-                  <Cascader
-                    placeholder="Specify whether the site is exposed to sunlight"
-                    options={yesno}
-                  />
-                )}
-              </Form.Item>
-              <Form.Item label="Height">
-                {getFieldDecorator("height", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please specify the device's positioning height",
-                    },
-                  ],
-                })(
-                  <Input placeholder="Enter the device's positioning height" />
-                )}
-              </Form.Item>
-              <Form.Item label="Weather type">
-                {getFieldDecorator("weatherType", {
-                  rules: [
-                    {
-                      type: "array",
-                      required: true,
-                      message: "Please specify the night's weather type!",
-                    },
-                  ],
-                })(
-                  <Cascader
-                    placeholder="Specify whether the night's weather type"
-                    options={weather}
-                  />
-                )}
-              </Form.Item>
-              <Form.Item label="Comments">
-                {getFieldDecorator("comment", {})(
-                  <Input placeholder="Enter a comment if so desired" />
-                )}
-              </Form.Item>
-              <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
-                  Save
+                <Form.Item label='Location name'>
+                  {getFieldDecorator('locationName', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please specify the location of the measurement'
+                      }
+                    ]
+                  })(<Input placeholder='Enter the location name' />)}
+                </Form.Item>
+                <Form.Item label='Device Position'>
+                  {getFieldDecorator('devicePosition', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please record the devices location on the map'
+                      }
+                    ]
+                  })(
+                    <div>
+                      <p>Please click on the map where the device was placed</p>
+                      <Map
+                        location={sighting.locationCoordinates}
+                        addPushPinOnClick={this.onMapClick}
+                      />
+                    </div>
+                  )}
+                </Form.Item>
+                <Form.Item label='Habitat Type'>
+                  {getFieldDecorator('habitatType', {
+                    rules: [
+                      {
+                        type: 'array',
+                        required: true,
+                        message: 'Please specify the habitat type!'
+                      }
+                    ]
+                  })(
+                    <Cascader
+                      placeholder='Enter the habitat type'
+                      options={habitats}
+                    />
+                  )}
+                </Form.Item>
+                <Form.Item label='Primary Vegetation Type'>
+                  {getFieldDecorator('primaryStructuringElementType', {
+                    rules: [
+                      {
+                        type: 'array',
+                        required: true,
+                        message: 'Please specify the primary vegetation type!'
+                      }
+                    ]
+                  })(
+                    <Cascader
+                      placeholder='Enter the primary vegetation type'
+                      options={primaryVegetation}
+                    />
+                  )}
+                </Form.Item>
+                <Form.Item label='Secondary Vegetation Type'>
+                  {getFieldDecorator('secondaryStructuringElementType', {})(
+                    <Cascader
+                      placeholder='Enter the secondary vegetation type'
+                      options={secondaryVegetation}
+                    />
+                  )}
+                </Form.Item>
+                <Form.Item label='Maintenance Type'>
+                  {getFieldDecorator('maintenanceType', {
+                    rules: [
+                      {
+                        type: 'array',
+                        required: true,
+                        message: 'Please specify the primary vegetation type!'
+                      }
+                    ]
+                  })(
+                    <Cascader
+                      placeholder='Enter the type of maintenance'
+                      options={maintenance}
+                    />
+                  )}
+                </Form.Item>
+                <Form.Item label='Exposure to sunlight'>
+                  {getFieldDecorator('isIlluminated', {
+                    rules: [
+                      {
+                        type: 'array',
+                        required: true,
+                        message:
+                          'Please specify whether the site is explosed to sunlight!'
+                      }
+                    ]
+                  })(
+                    <Cascader
+                      placeholder='Specify whether the site is exposed to sunlight'
+                      options={yesno}
+                    />
+                  )}
+                </Form.Item>
+                <Form.Item label='Height'>
+                  {getFieldDecorator('height', {
+                    rules: [
+                      {
+                        required: true,
+                        message: "Please specify the device's positioning height"
+                      }
+                    ]
+                  })(
+                    <Input placeholder="Enter the device's positioning height" />
+                  )}
+                </Form.Item>
+                <Form.Item label='Weather type'>
+                  {getFieldDecorator('weatherType', {
+                    rules: [
+                      {
+                        type: 'array',
+                        required: true,
+                        message: "Please specify the night's weather type!"
+                      }
+                    ]
+                  })(
+                    <Cascader
+                      placeholder="Specify whether the night's weather type"
+                      options={weather}
+                    />
+                  )}
+                </Form.Item>
+                <Form.Item label='Comments'>
+                  {getFieldDecorator('comment', {})(
+                    <Input placeholder='Enter a comment if so desired' />
+                  )}
+                </Form.Item>
+                <Form.Item {...tailFormItemLayout}>
+                  <Button type='primary' htmlType='submit'>
+                    Save
                 </Button>
-              </Form.Item>
-            </Form>
-          </div>
-        )}
+                </Form.Item>
+              </Form>
+            </div>
+          )}
       </Layout>
     )
   }
 }
 
 const WrappedBatRegistrationSubmissionForm = Form.create({
-  name: "submissionform",
+  name: 'submissionform'
 })(BatRegistrationSubmissionForm)
 
 export default WrappedBatRegistrationSubmissionForm
