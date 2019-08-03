@@ -125,6 +125,10 @@ const secondaryVegetation = [
 
 const yesno = [{ value: "yes", label: "yes" }, { value: "no", label: "no" }]
 
+const arrayReducer = array => {
+  return array.join(" - ")
+}
+
 class BatRegistrationSubmissionForm extends React.Component {
   state = {
     isLoading: false,
@@ -136,7 +140,7 @@ class BatRegistrationSubmissionForm extends React.Component {
       height: "",
       id: "",
       isIlluminated: "",
-      locationCoordinates: "",
+      locationCoordinates: { lat: "", long: "" },
       locationName: "",
       maintenanceType: "",
       microphoneNumber: "",
@@ -167,7 +171,7 @@ class BatRegistrationSubmissionForm extends React.Component {
       this.setState({
         sighting: {
           ...this.state.sighting,
-          startDate,
+          startDate: moment(startDate),
           endDate,
           id,
           observationAmount,
@@ -183,7 +187,8 @@ class BatRegistrationSubmissionForm extends React.Component {
     }
   }
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
+    let sighting
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
@@ -192,22 +197,44 @@ class BatRegistrationSubmissionForm extends React.Component {
             return
           }
 
-          // Todo: format date value before submit.
-          const values = {
-            ...fieldsValue,
-            "date-picker": fieldsValue["date-picker"].format("YYYYMMDD"),
-          }
+          // format values before submit
+          return (sighting = {
+            comment: fieldsValue.comment,
+            locationName: fieldsValue.locationName,
+            microphoneNumber: Number(fieldsValue.microphoneNumber),
+            observationAmount: this.state.sighting.observationAmount,
+            endDate: this.state.sighting.endDate,
+            operatorName: fieldsValue.operatorName,
+            deviceNumber: Number(fieldsValue.deviceNumber),
+            height: Number(fieldsValue.height),
+            startDate: fieldsValue["startDate"].format("YYYYMMDD"),
+            habitatType: arrayReducer(fieldsValue.habitatType),
+            isIlluminated: arrayReducer(fieldsValue.isIlluminated),
+            maintenanceType: arrayReducer(fieldsValue.maintenanceType),
+            primaryStructuringElementType: arrayReducer(
+              fieldsValue.primaryStructuringElementType
+            ),
 
-          // should join the values of the coordinates
-
-          // write the values to the server
-
-          // axios.post(
-          //   `http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${id}`
-          // )
+            secondaryStructuringElementType: arrayReducer(
+              fieldsValue.secondaryStructuringElementType
+            ),
+            weatherType: arrayReducer(fieldsValue.weatherType),
+            locationCoordinates: {
+              lat: Number(fieldsValue.latitude),
+              long: Number(fieldsValue.longitude),
+            },
+          })
         })
       }
     })
+
+    JSON.stringify(sighting)
+    console.log(sighting)
+
+    await axios.put(
+      `http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${this.state.sighting.id}`,
+      sighting
+    )
   }
 
   render() {
@@ -215,8 +242,7 @@ class BatRegistrationSubmissionForm extends React.Component {
     const { isLoading, sighting } = this.state
 
     const config = {
-      // initialValue:
-      //   moment(sighting.startDate, "YYYY-MM-DD") || moment("YYYY-MM-DD"),
+      initialValue: sighting.startDate || moment(),
       rules: [
         {
           type: "object",
@@ -255,6 +281,14 @@ class BatRegistrationSubmissionForm extends React.Component {
           <Spin size="large" />
         ) : (
           <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+            <Form.Item label="Date of first night of measurement">
+              {getFieldDecorator("startDate", config)(<DatePicker />)}
+            </Form.Item>
+            <Form.Item label="Number of bat observations">
+              {getFieldDecorator("observationAmount", {
+                initialValue: sighting.observationAmount,
+              })(<Input disabled />)}
+            </Form.Item>
             <Form.Item label="Device number">
               {getFieldDecorator("deviceNumber", {
                 rules: [
@@ -285,13 +319,9 @@ class BatRegistrationSubmissionForm extends React.Component {
                 ],
               })(<Input placeholder="Enter the name of the operator" />)}
             </Form.Item>
-            <Form.Item label="Date of first night of measurement">
-              {getFieldDecorator("startDate", config)(
-                <DatePicker setFieldsValue={sighting.startDate || moment()} />
-              )}
-            </Form.Item>
+
             <Form.Item label="Location name">
-              {getFieldDecorator("email", {
+              {getFieldDecorator("locationName", {
                 rules: [
                   {
                     required: true,
