@@ -252,7 +252,8 @@ class BatRegistrationSubmissionForm extends React.Component {
       sighting
     )
 
-    return <Redirect to="/sightings/view/" />
+    this.props.history.push("/sightings/view/");
+    return
   }
 
   onMapClick = location => {
