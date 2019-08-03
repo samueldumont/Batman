@@ -183,8 +183,8 @@ class BatRegistrationSubmissionForm extends React.Component {
           id,
           observationAmount,
           locationCoordinates: {
-            lat: this.state.sighting.locationCoordinates.lat || locationCoordinates.lat,
-            lng: this.state.sighting.locationCoordinates.lat || locationCoordinates.lng
+            lat: locationCoordinates.lat || this.state.sighting.locationCoordinates.lat,
+            lng: locationCoordinates.lng || this.state.sighting.locationCoordinates.lng
           }
         },
         isLoading: false
