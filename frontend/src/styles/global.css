@@ -25,3 +25,11 @@
   border-bottom: 2px solid white;
   opacity: 0.5;
 }
+
+.ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
+  color: rgba(166,176,98);
+}
+
+.ant-steps-item-finish > .ant-steps-item-content > .ant-steps-item-title::after {
+  background-color: rgba(166,176,98);
+}
