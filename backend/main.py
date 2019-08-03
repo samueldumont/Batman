@@ -36,7 +36,6 @@ api = Api(app,
 
 CORS(app)
 
-
 @api.route('/releves/<string:releve_id>')
 @api.doc()
 class Releves(Resource):
@@ -49,11 +48,11 @@ class Releves(Resource):
         else:
             raise NotFound
 
-    def put(self):
+    def put(self, releve_id):
         ''' Upsert a sighting with user input. '''
         payload = json.loads(request.data)
-        post_res = db.data.insert_one(payload).inserted_id
-        return jsonify({'id': str(post_res)})
+        db.data.update_one({'_id': ObjectId(releve_id)}, {"$set": payload}, upsert=True)
+        return "OK"
 
 @api.route('/records')
 @api.doc()
