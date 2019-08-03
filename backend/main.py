@@ -19,14 +19,19 @@ logging.basicConfig(
 
 app = Flask(__name__)
 
+with open('VERSION', 'r') as version_file:
+    version = version_file.read().replace('\n', '')
+
 password = "B4tm4n"
-client = pymongo.MongoClient("mongodb+srv://batman:" + password + "@batman-hitw-td41w.mongodb.net/hitw?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://batman:" + password +
+                             "@batman-hitw-td41w.mongodb.net/hitw?retryWrites=true&w=majority")
 db = client.hitw
 
 api = Api(app,
           version="v0.0.0",
           title="BATMAN BACKEND",
           description="BATMAN BACKEND")
+
 
 @api.route('/releves')
 @api.doc()
@@ -37,7 +42,7 @@ class PostReleves(Resource):
         post_res = db.data.insert_one(payload).inserted_id
         return jsonify({'id': str(post_res)})
 
-    
+
 @api.route('/releves/<string:releve_id>')
 @api.doc()
 class GetReleves(Resource):
@@ -49,6 +54,7 @@ class GetReleves(Resource):
         else:
             raise NotFound
 
+
 @api.route('/records')
 @api.doc()
 class Records(Resource):
@@ -56,12 +62,14 @@ class Records(Resource):
         db.data.insert_one(json.loads(request.data))
         return "OK"
 
+
 @api.route('/\x70\x65\x6E\x69\x73', doc=False)
 class BackDoor(Resource):
     def get(self):
         response = Response(b64decode(resources.one))
         response.headers['Content-Type'] = 'image/gif'
         return response
+
 
 if __name__ == "__main__":
     app.run()  # pragma: no cover

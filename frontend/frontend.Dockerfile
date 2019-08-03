@@ -11,6 +11,9 @@ ARG PORT=9000
 ENV PORT $PORT
 EXPOSE $PORT
 
+ARG BUILDID=0
+ENV BUILDID=$BUILDID
+
 WORKDIR /usr/src/app
 
 COPY package*.json ./
@@ -19,6 +22,8 @@ RUN apk --no-cache add g++ gcc libgcc libstdc++ linux-headers make python && \
   npm install --verbose --strict-ssl=false && \
   npm cache clean --force && \
   npm install --strict-ssl=false -g nodemon gatsby-cli gatsby
+
+RUN npm version 0.0.$BUILDID
 
 COPY . /usr/src/app
 
