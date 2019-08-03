@@ -28,7 +28,7 @@ client = pymongo.MongoClient("mongodb+srv://batman:" + password +
 db = client.hitw
 
 api = Api(app,
-          version="v0.0.0",
+          version=version,
           title="BATMAN BACKEND",
           description="BATMAN BACKEND")
 

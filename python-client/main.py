@@ -8,6 +8,7 @@ import pytz
 import csv
 import pprint
 import soundfile
+import requests
 
 
 @click.group()
