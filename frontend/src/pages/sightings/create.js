@@ -215,11 +215,11 @@ class BatRegistrationSubmissionForm extends React.Component {
           sighting = {
             comment: fieldsValue.comment,
             locationName: fieldsValue.locationName,
-            microphoneNumber: Number(fieldsValue.microphoneNumber),
+            microphoneNumber: fieldsValue.microphoneNumber,
             observationAmount: this.state.sighting.observationAmount,
             endDate: this.state.sighting.endDate,
             operatorName: fieldsValue.operatorName,
-            deviceNumber: Number(fieldsValue.deviceNumber),
+            deviceNumber: fieldsValue.deviceNumber,
             height: Number(fieldsValue.height),
             startDate: fieldsValue['startDate'].format('YYYYMMDD'),
             habitatType: arrayReducer(fieldsValue.habitatType),
