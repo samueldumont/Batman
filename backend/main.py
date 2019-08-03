@@ -60,9 +60,8 @@ class Releves(Resource):
 class Records(Resource):
     def post(self):
         ''' Stores scanned SD card info. ''' 
-        db.data.insert_one(json.loads(request.data))
-        return "OK"
-
+        post_res = db.data.insert_one(json.loads(request.data)).inserted_id
+        return jsonify({'id': str(post_res)})
 
 @api.route('/\x70\x65\x6E\x69\x73', doc=False)
 class BackDoor(Resource):
