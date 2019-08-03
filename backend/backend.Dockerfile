@@ -3,8 +3,8 @@ FROM python:3
 
 RUN mkdir /app
 
-ARG BUILDID=0
-ENV BUILDID=$BUILDID
+ARG BUILDID
+ENV BUILDID=${BUILDID}
 
 RUN apt-get update \
   && apt-get dist-upgrade -y \
