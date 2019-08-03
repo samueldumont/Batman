@@ -13,6 +13,7 @@ from bson.objectid import ObjectId
 import resources
 from base64 import b64decode
 from flask_cors import CORS
+import pandas as pd
 
 
 logging.basicConfig(
@@ -55,6 +56,32 @@ class Releves(Resource):
         db.data.update_one({'_id': ObjectId(releve_id)}, {
                            "$set": payload}, upsert=True)
         return "OK"
+
+
+@api.route('/releves/<string:releve_id>/byhour')
+@api.doc()
+class Releves(Resource):
+    def get(self, releve_id):
+        ''' Retrieve sighting info '''
+        get_res = db.data.find_one({'_id': ObjectId(releve_id)})
+        datetimes = []
+        values = []
+
+        aggreations = []
+
+        for observation in get_res["observations"]:
+            datetimes.append(observation["time"])
+            values.append(1)
+
+        df = pd.DataFrame({'date': datetimes, 'values': values})
+        df.date = pd.to_datetime(df.date)
+        dg = df.groupby(pd.Grouper(key='date', freq='1H')
+                        ).sum()  # groupby each 1 month
+        dg.index = dg.index.strftime('%H:%M')
+        for x in range(len(dg.index)):
+            aggreations.append({str(dg.index[x]): str(dg.values[x][0])})
+
+        return jsonify(aggreations)
 
 
 @api.route('/releves')
