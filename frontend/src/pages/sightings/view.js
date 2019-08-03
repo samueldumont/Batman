@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../../components/layout'
-import { Avatar, Descriptions, Icon, Steps } from 'antd'
+import { Avatar, Card, Row, Col, Statistic, Icon, Steps } from 'antd'
 import { Typography } from 'antd'
 import 'antd/dist/antd.css'
 import '../../styles/global.css'
@@ -12,34 +12,67 @@ import Map from '../../components/MapContainer'
 
 const { Title } = Typography
 const { Step } = Steps
+const { Meta } = Card
+
 export default () => {
     return (
         <div>
             <Layout>
-                <div style={{ marginBottom: '4rem' }}>
+                <Title>Sighting #123</Title>
+                <div style={{ marginBottom: '2rem' }}>
                     <Steps>
                         <Step status="finish" title="Metadata Uploaded" icon={<Icon type="user" />} />
                         <Step status="finish" title="Sighting Completed" icon={<Icon type="solution" />} />
                         <Step status="wait" title="Sound Analysis Completed" icon={<Icon type="smile-o" />} />
                     </Steps>
                 </div>
-                <Title>Sighting #123</Title>
                 <div style={{ display: 'flex', flex: 1, justifyContent: 'space-between' }}>
-                    <div style={{ display: 'flex', flex: 1 }}>
-                        <Descriptions title="General Info">
-                            <Descriptions.Item label="Device ID">B1-Dinant</Descriptions.Item>
-                            <Descriptions.Item label="Microphone ID">MDNF/2</Descriptions.Item>
-                            <Descriptions.Item label="Date">HsgittartDate</Descriptions.Item>
-                            <Descriptions.Item label="Remark">empty</Descriptions.Item>
-                            <Descriptions.Item label="Address">No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China</Descriptions.Item>
-                        </Descriptions>
+                    <div style={{display: 'flex', flex: 1, flexDirection: 'column'}}>
+                    <Row style={{ flex: 1 }} type='flex' gutter={20}>
+                        <Col className="gutter-row" span={6}>
+                            <Statistic title="Number of observations" value={249} suffix='recordings' />
+                        </Col>
+                        <Col className="gutter-row" span={6}>
+                            <Statistic title="Primary Structuring Element" value={'Bande boisée et alignement d\'arbre'} />
+                        </Col>
+                        <Col className="gutter-row" span={6}>
+                            <Statistic title="Maintenance" value={'prairie - site pâturé (avec animaux présents)'} />
+                        </Col>
+                        <Col className="gutter-row" span={6}>
+                            <Statistic title="Height" value={'150'} suffix='cm' />
+                        </Col>
+                    </Row>
+                    <Row style={{ flex: 1 }} type='flex' gutter={20}>
+                        <Col className="gutter-row" span={6}>
+                            <Statistic title="Date" value={'01/08/2019'} />
+                        </Col>
+                        <Col className="gutter-row" span={6}>
+                            <Statistic title="Location" value={'Eprave - Au pècheron'} />
+                        </Col>
+                        <Col className="gutter-row" span={6}>
+                            <Statistic title="Habitat" value={'Cours d\'eau - ruisseau (L < 3m)'} />
+                        </Col>
+                        <Col className="gutter-row" span={6}>
+                            <Statistic title="Illuminated" value={'no'} />
+                        </Col>
+                    </Row>
                     </div>
-                    <div>
-                        <Map
-                            mapStyle={{ height: '350px', width: '350px' }}
-                            location={{ lat: 50.606962, lng: 3.511842 }}
+
+                    <Card
+                        style={{ width: 350 }}
+                        cover={<div style={{ height: '350px' }}>
+                            <ReactBingmaps bingmapKey="AgUP2Ggx3ggz9rMkWlfOIZ2TzuPJv2wJsrikjmLpxqNb1rc_sBYy4I_hwq8R7cnX" center={[13.0827, 80.2707]}> </ReactBingmaps>
+                        </div>}
+                        actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
+                    >
+                        <Meta
+                            avatar={<Avatar src="https://cdn0.iconfinder.com/data/icons/profile-lipo-glyph/64/profile_user_character-29-512.png " />}
+                            title="Batman"
+                            description="Really enjoyed my time with the bats. Rated 7 stars out of 5."
                         />
-                    </div>
+                    </Card>
+
+
                 </div>
             </Layout>
             <div style={{ backgroundColor: '#efefef' }}>
@@ -58,6 +91,11 @@ export default () => {
                     </div>
                 </div>
             </div>
-        </div>
+            <div className='main-layout'>
+                <div style={{ height: '350px', width: '350px' }}>
+                    <ReactBingmaps bingmapKey="AgUP2Ggx3ggz9rMkWlfOIZ2TzuPJv2wJsrikjmLpxqNb1rc_sBYy4I_hwq8R7cnX" center={[13.0827, 80.2707]}> </ReactBingmaps>
+                </div>
+            </div>
+        </div >
     )
 }               
