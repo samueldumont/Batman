@@ -131,27 +131,31 @@ const arrayReducer = array => {
 }
 
 class BatRegistrationSubmissionForm extends React.Component {
-  state = {
-    isLoading: false,
-    sighting: {
-      comment: '',
-      deviceNumber: '',
-      endDate: '',
-      habitatType: '',
-      height: '',
-      id: '',
-      isIlluminated: '',
-      locationCoordinates: { lat: 50.606962, lng: 3.511842 },
-      locationName: '',
-      maintenanceType: '',
-      microphoneNumber: '',
-      observationAmount: '',
-      observations: [],
-      operatorName: '',
-      primaryStructuringElementType: '',
-      secondaryStructuringElementType: '',
-      startDate: '',
-      weatherType: ''
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isLoading: false,
+      sighting: {
+        comment: '',
+        deviceNumber: '',
+        endDate: '',
+        habitatType: '',
+        height: '',
+        id: '',
+        isIlluminated: '',
+        locationCoordinates: { lat: 50.606962, lng: 3.511842 },
+        locationName: '',
+        maintenanceType: '',
+        microphoneNumber: '',
+        observationAmount: '',
+        observations: [],
+        operatorName: '',
+        primaryStructuringElementType: '',
+        secondaryStructuringElementType: '',
+        startDate: '',
+        weatherType: ''
+      }
     }
   }
 
@@ -205,43 +209,41 @@ class BatRegistrationSubmissionForm extends React.Component {
         this.props.form.validateFields((err, fieldsValue) => {
           if (err) {
             return
-          } else {
+          }
 
-            // format values before submit
-            return (sighting = {
-              comment: fieldsValue.comment,
-              locationName: fieldsValue.locationName,
-              microphoneNumber: fieldsValue.microphoneNumber,
-              observationAmount: this.state.sighting.observationAmount,
-              endDate: this.state.sighting.endDate,
-              operatorName: fieldsValue.operatorName,
-              deviceNumber: fieldsValue.deviceNumber,
-              height: Number(fieldsValue.height),
-              startDate: fieldsValue['startDate'].format('YYYYMMDD'),
-              habitatType: arrayReducer(fieldsValue.habitatType),
-              isIlluminated: arrayReducer(fieldsValue.isIlluminated),
-              maintenanceType: arrayReducer(fieldsValue.maintenanceType),
-              primaryStructuringElementType: arrayReducer(
-                fieldsValue.primaryStructuringElementType
-              ),
-              secondaryStructuringElementType: arrayReducer(
-                fieldsValue.secondaryStructuringElementType
-              ),
-              weatherType: arrayReducer(fieldsValue.weatherType),
-              locationCoordinates: {
-                lat: this.state.locationCoordinates.lat,
-                lng: this.state.locationCoordinates.lgn
-              }
-            })
+          // format values before submit
+          sighting = {
+            comment: fieldsValue.comment,
+            locationName: fieldsValue.locationName,
+            microphoneNumber: Number(fieldsValue.microphoneNumber),
+            observationAmount: this.state.sighting.observationAmount,
+            endDate: this.state.sighting.endDate,
+            operatorName: fieldsValue.operatorName,
+            deviceNumber: Number(fieldsValue.deviceNumber),
+            height: Number(fieldsValue.height),
+            startDate: fieldsValue['startDate'].format('YYYYMMDD'),
+            habitatType: arrayReducer(fieldsValue.habitatType),
+            isIlluminated: arrayReducer(fieldsValue.isIlluminated),
+            maintenanceType: arrayReducer(fieldsValue.maintenanceType),
+            primaryStructuringElementType: arrayReducer(
+              fieldsValue.primaryStructuringElementType
+            ),
+
+            secondaryStructuringElementType: arrayReducer(
+              fieldsValue.secondaryStructuringElementType
+            ),
+            weatherType: arrayReducer(fieldsValue.weatherType),
+            locationCoordinates: {
+              lat: Number(fieldsValue.latitude),
+              long: Number(fieldsValue.longitude)
+            }
           }
         })
-      } else {
-        console.log('something went wrong')
       }
     })
 
-    console.log(sighting)
     JSON.stringify(sighting)
+    console.log(sighting)
 
     await axios.put(
       `http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${
@@ -249,30 +251,6 @@ class BatRegistrationSubmissionForm extends React.Component {
       }`,
       sighting
     )
-
-    this.setState({
-      isLoading: false,
-      sighting: {
-        comment: '',
-        deviceNumber: '',
-        endDate: '',
-        habitatType: '',
-        height: '',
-        id: '',
-        isIlluminated: '',
-        locationCoordinates: { lat: '', lng: '' },
-        locationName: '',
-        maintenanceType: '',
-        microphoneNumber: '',
-        observationAmount: '',
-        observations: [],
-        operatorName: '',
-        primaryStructuringElementType: '',
-        secondaryStructuringElementType: '',
-        startDate: '',
-        weatherType: ''
-      }
-    })
 
     return <Redirect to="/sightings/view/" />
   }
