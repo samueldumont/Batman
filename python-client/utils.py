@@ -48,6 +48,7 @@ def scan(folder):
                 if float(row[2]) and float(row[4]):
                     location = {"lat": float(
                         row[2]), "lng": float(row[4])}
+                    break
             except:
                 print("wrong location data")
 
