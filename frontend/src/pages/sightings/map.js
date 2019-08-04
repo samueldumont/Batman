@@ -35,7 +35,6 @@ export default class extends React.Component {
     }
 
     render() {
-        const { observationAmount, height, startDate, locationName, maintenanceType, primaryStructuringElementType, secondaryStructuringElementType, weatherType, microphoneNumber, isIlluminated, habitatType } = this.state
         if (this.state.isLoading) return null
         else return (
             <div>

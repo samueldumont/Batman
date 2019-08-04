@@ -17,6 +17,7 @@ export default props => {
       pushPins.push({ "location": [element["locationCoordinates"]["lat"], element["locationCoordinates"]["lng"]], "option": { color: color, description: element["observationAmount"].toString() + " observations", title: element["observationAmount"].toString(), subTitle: element["observationAmount"] } })
     })
   } else {
+    console.log(lat)
     pushPins = [
       {
         "location": [lat, lng],

@@ -13,13 +13,14 @@ import BarChart from '../../components/barchart'
 import axios from 'axios'
 import Map from '../../components/MapContainer'
 import { Tabs } from 'antd';
+import moment from 'moment'
 
 const { TabPane } = Tabs;
 const { Step } = Steps
 const { Meta } = Card
 
 export default class extends React.Component {
-    state = {}
+    state = { locationCoordinates: { lat: 0, lng: 0 } }
 
     async componentDidMount() {
         this.setState({ isLoading: true })
@@ -29,7 +30,10 @@ export default class extends React.Component {
         const backendData = await axios.get(`http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${id}`)
         console.log(backendData)
 
-        this.setState({ ...backendData.data, isLoading: false })
+        const date = moment(backendData.data.startDate, "YYYYMMDD").format("Do MMM YYYY")
+
+
+        this.setState({ ...backendData.data, date, isLoading: false })
     }
 
     toTitleCase = str => {
@@ -40,8 +44,9 @@ export default class extends React.Component {
 
     render() {
         console.log(this.state)
-        const { observationAmount, height, deviceNumber, startDate, locationName, maintenanceType, primaryStructuringElementType, secondaryStructuringElementType, weatherType, microphoneNumber, isIlluminated, habitatType } = this.state
-        return (
+        const { observationAmount, height, deviceNumber, startDate, locationName, maintenanceType, primaryStructuringElementType, secondaryStructuringElementType, weatherType, microphoneNumber, isIlluminated, habitatType, date, locationCoordinates } = this.state
+        if (this.state.isLoading) return null
+        else return (
             <div>
                 <Layout>
                     <div style={{ marginBottom: '1rem' }}>
@@ -80,7 +85,7 @@ export default class extends React.Component {
                                     <Row style={{ flex: 1, marginLeft: 0, marginRight: 0 }} type='flex' gutter={20}>
                                         <Col className="gutter-row" style={{ paddingLeft: 0 }} span={6}>
                                             <div className='cardbox cardbox-1'>
-                                                <Statistic title="Date" value={startDate} />
+                                                <Statistic title="Date" value={date} />
                                             </div>
                                         </Col>
                                         <Col className="gutter-row" style={{ paddingLeft: 0 }} span={6}>
@@ -111,7 +116,7 @@ export default class extends React.Component {
                         <Card
                             style={{ width: 350, marginTop: '3.8rem' }}
                             cover={<div style={{ height: '350px' }}>
-                                <Map mapStyle={{ height: '350px', width: '350px' }} location={{ lat: 50.606962, lng: 3.511842 }} />
+                                <Map mapStyle={{ height: '350px', width: '350px' }} location={locationCoordinates} />
                             </div>}
                             actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
                         >
