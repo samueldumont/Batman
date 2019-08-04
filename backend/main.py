@@ -77,7 +77,7 @@ class Releves(Resource):
         df.date = pd.to_datetime(df.date)
         dg = df.groupby(pd.Grouper(key='date', freq='1H')
                         ).sum()  # groupby each 1 month
-        dg.index = dg.index.strftime('%H:%M')
+        dg.index = dg.index.strftime('%Y-%m-%d %H:%M')
         for x in range(len(dg.index)):
             aggreations.append({str(dg.index[x]): str(dg.values[x][0])})
 
