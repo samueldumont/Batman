@@ -44,25 +44,25 @@ export default class extends React.Component {
                     <Title>Sighting #123</Title>
                     <div style={{ marginBottom: '2rem' }}>
                         <Steps>
-                            <Step status="finish" title="Metadata Uploaded" icon={<Icon type="user" />} />
-                            <Step status="finish" title="Sighting Completed" icon={<Icon type="solution" />} />
-                            <Step status="wait" title="Sound Analysis Completed" icon={<Icon type="smile-o" />} />
+                            <Step status="finish" title="Metadonnées Uploadées" icon={<Icon type="user" />} />
+                            <Step status="finish" title="Observation validée" icon={<Icon type="solution" />} />
+                            <Step status="wait" title="Analyse effectuée" icon={<Icon type="smile-o" />} />
                         </Steps>
                     </div>
                     <div style={{ display: 'flex', flex: 1, justifyContent: 'space-between' }}>
                         <Card style={{ display: 'flex', flex: 1, flexDirection: 'column', marginRight: '1rem' }}>
                             <Row style={{ flex: 1, marginBottom: '5rem' }} type='flex' gutter={20}>
                                 <Col className="gutter-row" span={6}>
-                                    <Statistic title="Number of observations" value={observationAmount} suffix='recordings' />
+                                    <Statistic title="Nombre d'observations" value={observationAmount} suffix='observation' />
                                 </Col>
                                 <Col className="gutter-row" span={6}>
-                                    <Statistic title="Primary Structuring Element" value={primaryStructuringElementType} />
+                                    <Statistic title="Elément structurant principal" value={primaryStructuringElementType} />
                                 </Col>
                                 <Col className="gutter-row" span={6}>
-                                    <Statistic title="Maintenance" value={maintenanceType} />
+                                    <Statistic title="Gestion" value={maintenanceType} />
                                 </Col>
                                 <Col className="gutter-row" span={6}>
-                                    <Statistic title="Height" value={height} suffix='cm' />
+                                    <Statistic title="Hauteur de pose" value={height} suffix='cm' />
                                 </Col>
                             </Row>
                             <Row style={{ flex: 1 }} type='flex' gutter={20}>
@@ -70,13 +70,13 @@ export default class extends React.Component {
                                     <Statistic title="Date" value={startDate} />
                                 </Col>
                                 <Col className="gutter-row" span={6}>
-                                    <Statistic title="Location" value={locationName} />
+                                    <Statistic title="Emplacement" value={locationName} />
                                 </Col>
                                 <Col className="gutter-row" span={6}>
                                     <Statistic title="Habitat" value={habitatType} />
                                 </Col>
                                 <Col className="gutter-row" span={6}>
-                                    <Statistic title="Illuminated" value={isIlluminated} />
+                                    <Statistic title="Eclairé" value={isIlluminated} />
                                 </Col>
                             </Row>
                         </Card>
