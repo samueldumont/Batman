@@ -1,5 +1,6 @@
 import React from 'react'
-import { DatePicker, Form, Input, Cascader, Button, Spin } from 'antd'
+import { DatePicker, Form, Input, Cascader, Button, Spin, Icon, Steps, Typography } from 'antd'
+
 import axios from 'axios'
 import moment from 'moment'
 import { Redirect } from 'react-router-dom'
@@ -9,6 +10,9 @@ import 'antd/dist/antd.css'
 import '../../styles/global.css'
 
 import Map from '../../components/MapContainer'
+
+const { Title } = Typography
+const { Step } = Steps
 
 const habitats = [
   {
@@ -315,6 +319,14 @@ class BatRegistrationSubmissionForm extends React.Component {
           <Spin size='large' />
         ) : (
             <div>
+              <Title>Sighting #123</Title>
+              <div style={{ marginBottom: '2rem' }}>
+                <Steps>
+                  <Step status="finish" title="Metadata Uploaded" icon={<Icon type="user" />} />
+                  <Step status="wait" title="Sighting Completed" icon={<Icon type="solution" />} />
+                  <Step status="wait" title="Sound Analysis Completed" icon={<Icon type="smile-o" />} />
+                </Steps>
+              </div>
               <Form {...formItemLayout} onSubmit={this.handleSubmit}>
                 <Form.Item label='Date of first night of measurement'>
                   {getFieldDecorator('startDate', config)(<DatePicker />)}
