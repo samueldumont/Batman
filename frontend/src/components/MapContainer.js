@@ -3,6 +3,29 @@ import { ReactBingmaps as Map } from 'react-bingmaps'
 
 export default props => {
   const { lat, lng } = props.location
+  let pushPins = []
+
+  if (props.pushPins !== undefined && Array.isArray(props.pushPins)) {
+    props.pushPins.forEach(function (element) {
+      let color = "blue"
+      if (element["observationAmount"] > 150) {
+        color = "orange"
+      }
+      if (element["observationAmount"] > 300) {
+        color = "red"
+      }
+      pushPins.push({ "location": [element["locationCoordinates"]["lat"], element["locationCoordinates"]["lng"]], "option": { color: color, description: element["observationAmount"].toString() + " observations", title: element["observationAmount"].toString(), subTitle: element["observationAmount"] } })
+    })
+  } else {
+    pushPins = [
+      {
+        "location": [lat, lng],
+        "option": { color: 'red', title: `Batman and Robin's lovehut` }
+      }
+    ]
+  }
+
+  console.log(pushPins)
 
   return (
     <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
@@ -15,12 +38,7 @@ export default props => {
             addHandler: 'click',
             callback: props.addPushPinOnClick
           }}
-          pushPins={[
-            {
-              "location": [lat, lng],
-              "option": { color: 'red', title: `Batman and Robin's lovehut` }
-            }
-          ]}
+          pushPins={pushPins}
         />
       </div>
     </div>
