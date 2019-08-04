@@ -256,7 +256,7 @@ class BatRegistrationSubmissionForm extends React.Component {
       sighting
     )
 
-    this.props.history.push("/sightings/view/");
+    this.props.history.push(`/sightings/view/${this.state.sighting.id}`);
     return
   }
 
