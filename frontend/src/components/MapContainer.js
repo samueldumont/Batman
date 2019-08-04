@@ -3,6 +3,7 @@ import { ReactBingmaps as Map } from 'react-bingmaps'
 
 export default props => {
   const { lat, lng } = props.location
+  const { zoom = 15 } = props
   let pushPins = []
 
   if (props.pushPins !== undefined && Array.isArray(props.pushPins)) {
@@ -33,7 +34,7 @@ export default props => {
       <div style={props.mapStyle}>
         <Map
           center={[lat, lng]}
-          zoom={15}
+          zoom={zoom}
           bingmapKey='AgUP2Ggx3ggz9rMkWlfOIZ2TzuPJv2wJsrikjmLpxqNb1rc_sBYy4I_hwq8R7cnX'
           getLocation={{
             addHandler: 'click',

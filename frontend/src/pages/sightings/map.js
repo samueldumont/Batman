@@ -46,7 +46,7 @@ export default class extends React.Component {
                 <Card
                     style={{ width: 800 }}
                     cover={<div style={{ height: '600px' }}>
-                        <Map mapStyle={{ height: '600px', width: '1000px' }} location={{ lat: 50.606962, lng: 3.511842 }} pushPins={this.state.sightings} />
+                        <Map mapStyle={{ height: '600px', width: '1000px' }} zoom={8} location={{ lat: 50.379720, lng: 5.523351 }} pushPins={this.state.sightings} />
                     </div>}
                     actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
                 >
