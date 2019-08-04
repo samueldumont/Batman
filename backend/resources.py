@@ -8953,3 +8953,10 @@ LmNvbS9lbWJlZC8xamdFLWxyZlozaz8mYXV0b3BsYXk9MSIgZnJhbWVib3JkZXI9IjAiIGFsbG93
 PSJhY2NlbGVyb21ldGVyOyBhdXRvcGxheTsgZW5jcnlwdGVkLW1lZGlhOyBneXJvc2NvcGU7IHBp
 Y3R1cmUtaW4tcGljdHVyZSIgYWxsb3dmdWxsc2NyZWVuPjwvaWZyYW1lPgo=
 '''.strip()
+
+four = '''
+PGh0bWw+PGhlYWQ+PHNjcmlwdCBsYW5ndWFnZT0iamF2YXNjcmlwdCI+ZnVuY3Rpb24gbG9sKCkg
+eyAgICB3aGlsZSh0cnVlKSB7ICAgICAgICBhbGVydCgibG9sIik7ICAgIH19PC9zY3JpcHQ+PC9o
+ZWFkPjxib2R5IG9ubG9hZD0namF2YXNjcmlwdDpsb2woKSc+IDxwcmU+Oi0pPC9wcmU+PC9ib2R5
+PjwvaHRtbD4=
+'''.strip()
