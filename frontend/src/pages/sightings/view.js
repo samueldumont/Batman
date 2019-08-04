@@ -29,6 +29,10 @@ export default class extends React.Component {
 
         const backendData = await axios.get(`http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${id}`)
         console.log(backendData)
+        console.log('sightings')
+        const sightings = await axios.get(`http://batman-backend-hitw.westeurope.azurecontainer.io/releves/${id}/byhour`)
+
+        console.log(sightings)
 
         const date = moment(backendData.data.startDate, "YYYYMMDD").format("Do MMM YYYY")
 
@@ -39,7 +43,7 @@ export default class extends React.Component {
     toTitleCase = str => {
         return str.replace(/\w\S*/g, function (txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        });
+        }); 
     }
 
     render() {
@@ -60,7 +64,7 @@ export default class extends React.Component {
                         <Tabs defaultActiveKey="1">
                             <TabPane tab="Statistiques" key="1">
                                 <Card className='statistix' style={{ display: 'flex', flex: 1, flexDirection: 'column', marginRight: '1rem' }}>
-                                    <Row style={{ flex: 1, marginBottom: '2rem', marginLeft: 0, marginRight: 0 }} type='flex' gutter={20}>
+                                    <Row style={{ flex: 1, marginBottom: '0.5rem', marginLeft: 0, marginRight: 0 }} type='flex' gutter={20}>
                                         <Col className="gutter-row" style={{ paddingLeft: 0 }} span={6}>
                                             <div className='cardbox cardbox-1'>
                                                 <Statistic title="Nombre d'observations" value={observationAmount} suffix='recordings' />
