@@ -319,7 +319,7 @@ class BatRegistrationSubmissionForm extends React.Component {
                 <Form.Item label='Date de la première mesure'>
                   {getFieldDecorator('startDate', config)(<DatePicker />)}
                 </Form.Item>
-                <Form.Item label='Nombre d\'observations'>
+                <Form.Item label={'Nombre d\'observations'}>
                   {getFieldDecorator('observationAmount', {
                     initialValue: sighting.observationAmount
                   })(<Input disabled />)}
@@ -344,7 +344,7 @@ class BatRegistrationSubmissionForm extends React.Component {
                     ]
                   })(<Input placeholder='Entrez un numéro de micro' />)}
                 </Form.Item>
-                <Form.Item label='Nom de l\'opérateur'>
+                <Form.Item label={'Nom de l\'opérateur'}>
                   {getFieldDecorator('operatorName', {
                     rules: [
                       {
@@ -352,10 +352,10 @@ class BatRegistrationSubmissionForm extends React.Component {
                         message: "Veuillez entrer le nom de l'\'opérateur"
                       }
                     ]
-                  })(<Input placeholder='Entrez le nom de l\'opérateur' />)}
+                  })(<Input placeholder={'Entrez le nom de l\'opérateur'} />)}
                 </Form.Item>
 
-                <Form.Item label='Site d\'enregistrement'>
+                <Form.Item label={'Site d\'enregistrement'}>
                   {getFieldDecorator('locationName', {
                     rules: [
                       {
@@ -389,7 +389,7 @@ class BatRegistrationSubmissionForm extends React.Component {
                     ]
                   })(
                     <Cascader
-                      placeholder='Sélectionnez l\'habitat'
+                      placeholder={'Sélectionnez l\'habitat'}
                       options={habitats}
                     />
                   )}
@@ -413,7 +413,7 @@ class BatRegistrationSubmissionForm extends React.Component {
                 <Form.Item label='Elément structurant secondaire (divers)'>
                   {getFieldDecorator('secondaryStructuringElementType', {})(
                     <Cascader
-                      placeholder='Sélectionnez l\'élément structurant secondaire'
+                      placeholder={'Sélectionnez l\'élément structurant secondaire'}
                       options={secondaryVegetation}
                     />
                   )}
