@@ -235,7 +235,7 @@ class BatRegistrationSubmissionForm extends React.Component {
             weatherType: arrayReducer(fieldsValue.weatherType),
             locationCoordinates: {
               lat: Number(fieldsValue.latitude),
-              long: Number(fieldsValue.longitude)
+              lng: Number(fieldsValue.longitude)
             }
           }
         })
