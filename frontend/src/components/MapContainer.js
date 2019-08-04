@@ -23,7 +23,11 @@ export default props => {
           title: element["observationAmount"].toString(),
           subTitle: element["observationAmount"],
         },
-        "addHandler": { "type": "click", callback: function () { console.log(element) } }
+        "addHandler": {
+          "type": "click", callback: function () {
+            props.redirect(element["id"]);
+          }
+        }
       })
     })
   } else {

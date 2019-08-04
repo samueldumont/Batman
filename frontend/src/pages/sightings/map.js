@@ -35,6 +35,10 @@ export default class extends React.Component {
         })
     }
 
+    redirect(id) {
+        this.props.history.push(`/sightings/view/#${id}`)
+    }
+
     pushpinClicked(e) {
         console.log(e)
         //Make sure the infobox has metadata to display.
@@ -53,7 +57,7 @@ export default class extends React.Component {
                 <Card
                     style={{ width: 800 }}
                     cover={<div style={{ height: '600px' }}>
-                        <Map mapStyle={{ height: '600px', width: '1000px' }} zoom={8} addPushPinOnClick={this.pushpinClicked} location={{ lat: 50.379720, lng: 5.523351 }} pushPins={this.state.sightings} />
+                        <Map mapStyle={{ height: '600px', width: '1000px' }} zoom={8} addPushPinOnClick={this.pushpinClicked} redirect={(id) => this.redirect(id)} location={{ lat: 50.379720, lng: 5.523351 }} pushPins={this.state.sightings} />
                     </div>}
                     actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
                 >
