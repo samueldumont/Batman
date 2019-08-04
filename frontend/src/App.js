@@ -8,18 +8,6 @@ function AppRouter() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/sightings/create/">create sighting</Link>
-            </li>
-            <li>
-              <Link to="/sightings/view/">view sighting</Link>
-            </li>
-          </ul>
-        </nav>
-
-
         <Route path="/sightings/create/" component={CreateSighting} />
         <Route path="/sightings/view/" component={ViewSighting} />
       </div>
