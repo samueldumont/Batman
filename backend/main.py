@@ -38,6 +38,28 @@ api = Api(app,
 CORS(app)
 
 
+def get_releves_by_timeframe(releve_id, timeframe):
+    get_res = db.data.find_one({'_id': ObjectId(releve_id)})
+    datetimes = []
+    values = []
+
+    aggreations = []
+
+    for observation in get_res["observations"]:
+        datetimes.append(observation["time"])
+        values.append(1)
+
+    df = pd.DataFrame({'date': datetimes, 'values': values})
+    df.date = pd.to_datetime(df.date)
+    dg = df.groupby(pd.Grouper(key='date', freq=timeframe)
+                    ).sum()  # groupby each 1 month
+    dg.index = dg.index.strftime('%Y-%m-%d %H:%M')
+    for x in range(len(dg.index)):
+        aggreations.append({str(dg.index[x]): str(dg.values[x][0])})
+
+    return jsonify(aggreations)
+
+
 @api.route('/releves/<string:releve_id>')
 @api.doc()
 class Releves(Resource):
@@ -63,25 +85,15 @@ class Releves(Resource):
 class Releves(Resource):
     def get(self, releve_id):
         ''' Retrieve sighting info '''
-        get_res = db.data.find_one({'_id': ObjectId(releve_id)})
-        datetimes = []
-        values = []
+        return get_releves_by_timeframe(releve_id, "1H")
 
-        aggreations = []
 
-        for observation in get_res["observations"]:
-            datetimes.append(observation["time"])
-            values.append(1)
-
-        df = pd.DataFrame({'date': datetimes, 'values': values})
-        df.date = pd.to_datetime(df.date)
-        dg = df.groupby(pd.Grouper(key='date', freq='1H')
-                        ).sum()  # groupby each 1 month
-        dg.index = dg.index.strftime('%H:%M')
-        for x in range(len(dg.index)):
-            aggreations.append({str(dg.index[x]): str(dg.values[x][0])})
-
-        return jsonify(aggreations)
+@api.route('/releves/<string:releve_id>/bytimeframe/<string:timeframe>')
+@api.doc()
+class Releves(Resource):
+    def get(self, releve_id, timeframe):
+        ''' Retrieve sighting info '''
+        return get_releves_by_timeframe(releve_id, timeframe)
 
 
 @api.route('/releves')
