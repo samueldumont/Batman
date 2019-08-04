@@ -252,7 +252,7 @@ class BatRegistrationSubmissionForm extends React.Component {
       sighting
     )
 
-    this.props.history.push("/sightings/view/");
+    this.props.history.push(`/sightings/view/${this.state.sighting.id}`);
     return
   }
 
@@ -281,7 +281,7 @@ class BatRegistrationSubmissionForm extends React.Component {
         {
           type: 'object',
           required: true,
-          message: 'Please select a date!'
+          message: 'Veuillez sélectionner une date!'
         }
       ]
     }
@@ -316,60 +316,60 @@ class BatRegistrationSubmissionForm extends React.Component {
         ) : (
             <div>
               <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-                <Form.Item label='Date of first night of measurement'>
+                <Form.Item label='Date de la première mesure'>
                   {getFieldDecorator('startDate', config)(<DatePicker />)}
                 </Form.Item>
-                <Form.Item label='Number of bat observations'>
+                <Form.Item label='Nombre d\'observations'>
                   {getFieldDecorator('observationAmount', {
                     initialValue: sighting.observationAmount
                   })(<Input disabled />)}
                 </Form.Item>
-                <Form.Item label='Device number'>
+                <Form.Item label='Numéro du boitier'>
                   {getFieldDecorator('deviceNumber', {
                     rules: [
                       {
                         required: true,
-                        message: 'Please specify a device number'
+                        message: 'Veuillez spécifier un numéro de boitier'
                       }
                     ]
-                  })(<Input placeholder='Enter a device number' />)}
+                  })(<Input placeholder='Entrez un numéro de boitier' />)}
                 </Form.Item>
-                <Form.Item label='Microphone number'>
+                <Form.Item label='Numéro du micro'>
                   {getFieldDecorator('microphoneNumber', {
                     rules: [
                       {
                         required: true,
-                        message: 'Please specify a microphone number'
+                        message: 'Veuillez specifier un numéro de micro'
                       }
                     ]
-                  })(<Input placeholder='Enter a microphone number' />)}
+                  })(<Input placeholder='Entrez un numéro de micro' />)}
                 </Form.Item>
-                <Form.Item label='Operator name'>
+                <Form.Item label='Nom de l\'opérateur'>
                   {getFieldDecorator('operatorName', {
                     rules: [
                       {
                         required: true,
-                        message: "Please specify the operator's name"
+                        message: "Veuillez entrer le nom de l'\'opérateur"
                       }
                     ]
-                  })(<Input placeholder='Enter the name of the operator' />)}
+                  })(<Input placeholder='Entrez le nom de l\'opérateur' />)}
                 </Form.Item>
 
-                <Form.Item label='Location name'>
+                <Form.Item label='Site d\'enregistrement'>
                   {getFieldDecorator('locationName', {
                     rules: [
                       {
                         required: true,
-                        message: 'Please specify the location of the measurement'
+                        message: 'Veuillez spécifier un nom de site'
                       }
                     ]
-                  })(<Input placeholder='Enter the location name' />)}
+                  })(<Input placeholder='Entrez le nom du site' />)}
                 </Form.Item>
-                <Form.Item label='Device Position'>
+                <Form.Item label='Emplacement du site'>
                   {getFieldDecorator('devicePosition', {
                   })(
                     <div>
-                      <p>Please click on the map where the device was placed</p>
+                      <p>Cliquer sur la carte à l'endroit où le boitier a été installé</p>
                       <Map
                         location={sighting.locationCoordinates}
                         addPushPinOnClick={this.onMapClick}
@@ -378,115 +378,115 @@ class BatRegistrationSubmissionForm extends React.Component {
                     </div>
                   )}
                 </Form.Item>
-                <Form.Item label='Habitat Type'>
+                <Form.Item label='Habitat dominant'>
                   {getFieldDecorator('habitatType', {
                     rules: [
                       {
                         type: 'array',
                         required: true,
-                        message: 'Please specify the habitat type!'
+                        message: 'Veuillez spécifier l\'habitat!'
                       }
                     ]
                   })(
                     <Cascader
-                      placeholder='Enter the habitat type'
+                      placeholder='Sélectionnez l\'habitat'
                       options={habitats}
                     />
                   )}
                 </Form.Item>
-                <Form.Item label='Primary Vegetation Type'>
+                <Form.Item label='Elément structurant principal (végétation)'>
                   {getFieldDecorator('primaryStructuringElementType', {
                     rules: [
                       {
                         type: 'array',
                         required: true,
-                        message: 'Please specify the primary vegetation type!'
+                        message: 'Veuillez spécifier la végétation!'
                       }
                     ]
                   })(
                     <Cascader
-                      placeholder='Enter the primary vegetation type'
+                      placeholder='Sélectionner la végétation'
                       options={primaryVegetation}
                     />
                   )}
                 </Form.Item>
-                <Form.Item label='Secondary Vegetation Type'>
+                <Form.Item label='Elément structurant secondaire (divers)'>
                   {getFieldDecorator('secondaryStructuringElementType', {})(
                     <Cascader
-                      placeholder='Enter the secondary vegetation type'
+                      placeholder='Sélectionnez l\'élément structurant secondaire'
                       options={secondaryVegetation}
                     />
                   )}
                 </Form.Item>
-                <Form.Item label='Maintenance Type'>
+                <Form.Item label='Gestion'>
                   {getFieldDecorator('maintenanceType', {
                     rules: [
                       {
                         type: 'array',
                         required: true,
-                        message: 'Please specify the primary vegetation type!'
+                        message: 'Veuillez entrer la gestion!'
                       }
                     ]
                   })(
                     <Cascader
-                      placeholder='Enter the type of maintenance'
+                      placeholder='Sélectionnez la gestion'
                       options={maintenance}
                     />
                   )}
                 </Form.Item>
-                <Form.Item label='Exposure to sunlight'>
+                <Form.Item label='Eclairage'>
                   {getFieldDecorator('isIlluminated', {
                     rules: [
                       {
                         type: 'array',
                         required: true,
                         message:
-                          'Please specify whether the site is explosed to sunlight!'
+                          'Veuillez spécifier l\'éclairage!'
                       }
                     ]
                   })(
                     <Cascader
-                      placeholder='Specify whether the site is exposed to sunlight'
+                      placeholder='Le site est-il éclairé?'
                       options={yesno}
                     />
                   )}
                 </Form.Item>
-                <Form.Item label='Height'>
+                <Form.Item label='Hauteur de pose'>
                   {getFieldDecorator('height', {
                     rules: [
                       {
                         required: true,
-                        message: "Please specify the device's positioning height"
+                        message: "Veuillez indiquer la hauteur de pose"
                       }
                     ]
                   })(
-                    <Input placeholder="Enter the device's positioning height" />
+                    <Input placeholder="Hauteur de pose du boitier" />
                   )}
                 </Form.Item>
-                <Form.Item label='Weather type'>
+                <Form.Item label='Météo'>
                   {getFieldDecorator('weatherType', {
                     rules: [
                       {
                         type: 'array',
                         required: true,
-                        message: "Please specify the night's weather type!"
+                        message: "Veuillez indiquer la météo"
                       }
                     ]
                   })(
                     <Cascader
-                      placeholder="Specify whether the night's weather type"
+                      placeholder="Sélectionnez la météo"
                       options={weather}
                     />
                   )}
                 </Form.Item>
-                <Form.Item label='Comments'>
+                <Form.Item label='Commentaire'>
                   {getFieldDecorator('comment', {})(
-                    <Input placeholder='Enter a comment if so desired' />
+                    <Input placeholder='Commentaire optionnel' />
                   )}
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
                   <Button type='primary' htmlType='submit'>
-                    Save
+                    Envoyer
                 </Button>
                 </Form.Item>
               </Form>
