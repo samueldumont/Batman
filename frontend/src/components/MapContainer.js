@@ -15,7 +15,16 @@ export default props => {
       if (element["observationAmount"] > 300) {
         color = "red"
       }
-      pushPins.push({ "location": [element["locationCoordinates"]["lat"], element["locationCoordinates"]["lng"]], "option": { color: color, description: element["observationAmount"].toString() + " observations", title: element["observationAmount"].toString(), subTitle: element["observationAmount"] } })
+      pushPins.push({
+        "location": [element["locationCoordinates"]["lat"], element["locationCoordinates"]["lng"]],
+        "option": {
+          color: color,
+          description: element["observationAmount"].toString() + " observations",
+          title: element["observationAmount"].toString(),
+          subTitle: element["observationAmount"],
+        },
+        "addHandler": { "type": "click", callback: function () { console.log(element) } }
+      })
     })
   } else {
     console.log(lat)
@@ -26,8 +35,6 @@ export default props => {
       }
     ]
   }
-
-  console.log(pushPins)
 
   return (
     <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>

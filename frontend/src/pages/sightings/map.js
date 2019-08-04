@@ -24,7 +24,8 @@ export default class extends React.Component {
         const locations = []
 
         backendData.data.forEach(function (element) {
-            locations.push({ "observationAmount": element["observationAmount"], "locationCoordinates": element["locationCoordinates"] })
+            console.log(element)
+            locations.push({ "observationAmount": element["observationAmount"], "locationCoordinates": element["locationCoordinates"], "id": element["_id"] })
         })
 
         this.setState({
@@ -32,6 +33,12 @@ export default class extends React.Component {
             isLoading: false,
             sightings: locations
         })
+    }
+
+    pushpinClicked(e) {
+        console.log(e)
+        //Make sure the infobox has metadata to display.
+
     }
 
     render() {
@@ -46,7 +53,7 @@ export default class extends React.Component {
                 <Card
                     style={{ width: 800 }}
                     cover={<div style={{ height: '600px' }}>
-                        <Map mapStyle={{ height: '600px', width: '1000px' }} zoom={8} location={{ lat: 50.379720, lng: 5.523351 }} pushPins={this.state.sightings} />
+                        <Map mapStyle={{ height: '600px', width: '1000px' }} zoom={8} addPushPinOnClick={this.pushpinClicked} location={{ lat: 50.379720, lng: 5.523351 }} pushPins={this.state.sightings} />
                     </div>}
                     actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
                 >

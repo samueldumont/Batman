@@ -104,7 +104,6 @@ class RelevesList(Resource):
         ''' Retrieve sighting info '''
         get_res = db.data.find({})
         for document in get_res:
-            del document['_id']
             releveslist.append(document)
 
         return jsonify(releveslist)
